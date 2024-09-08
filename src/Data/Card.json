@@ -1,0 +1,264 @@
+{
+  "Cards": [
+    {
+      "tipo": "vidrio",
+      "color": "#e46c0a",
+      "valor": "As"
+    },
+    {
+      "tipo": "vidrio",
+      "color": "#e46c0a",
+      "valor": "2"
+    },
+    {
+      "tipo": "vidrio",
+      "color": "#e46c0a",
+      "valor": "3"
+    },
+    {
+      "tipo": "vidrio",
+      "color": "#e46c0a",
+      "valor": "4"
+    },
+    {
+      "tipo": "vidrio",
+      "color": "#e46c0a",
+      "valor": "5"
+    },
+    {
+      "tipo": "vidrio",
+      "color": "#e46c0a",
+      "valor": "6"
+    },
+    {
+      "tipo": "vidrio",
+      "color": "#e46c0a",
+      "valor": "7"
+    },
+    {
+      "tipo": "vidrio",
+      "color": "#e46c0a",
+      "valor": "8"
+    },
+    {
+      "tipo": "vidrio",
+      "color": "#e46c0a",
+      "valor": "9"
+    },
+    {
+      "tipo": "vidrio",
+      "color": "#e46c0a",
+      "valor": "10"
+    },
+    {
+      "tipo": "vidrio",
+      "color": "#e46c0a",
+      "valor": "J"
+    },
+    {
+      "tipo": "vidrio",
+      "color": "#e46c0a",
+      "valor": "Q"
+    },
+    {
+      "tipo": "vidrio",
+      "color": "#e46c0a",
+      "valor": "K"
+    },
+    {
+      "tipo": "papel y carton",
+      "color": "#a4a3a3",
+      "valor": "As"
+    },
+    {
+      "tipo": "papel y carton",
+      "color": "#a4a3a3",
+      "valor": "2"
+    },
+    {
+      "tipo": "papel y carton",
+      "color": "#a4a3a3",
+      "valor": "3"
+    },
+    {
+      "tipo": "papel y carton",
+      "color": "#a4a3a3",
+      "valor": "4"
+    },
+    {
+      "tipo": "papel y carton",
+      "color": "#a4a3a3",
+      "valor": "5"
+    },
+    {
+      "tipo": "papel y carton",
+      "color": "#a4a3a3",
+      "valor": "6"
+    },
+    {
+      "tipo": "papel y carton",
+      "color": "#a4a3a3",
+      "valor": "7"
+    },
+    {
+      "tipo": "papel y carton",
+      "color": "#a4a3a3",
+      "valor": "8"
+    },
+    {
+      "tipo": "papel y carton",
+      "color": "#a4a3a3",
+      "valor": "9"
+    },
+    {
+      "tipo": "papel y carton",
+      "color": "#a4a3a3",
+      "valor": "10"
+    },
+    {
+      "tipo": "papel y carton",
+      "color": "#a4a3a3",
+      "valor": "J"
+    },
+    {
+      "tipo": "papel y carton",
+      "color": "#a4a3a3",
+      "valor": "Q"
+    },
+    {
+      "tipo": "papel y carton",
+      "color": "#a4a3a3",
+      "valor": "K"
+    },
+    {
+      "tipo": "aluminio",
+      "color": "#ffed00",
+      "valor": "As"
+    },
+    {
+      "tipo": "aluminio",
+      "color": "#ffed00",
+      "valor": "2"
+    },
+    {
+      "tipo": "aluminio",
+      "color": "#ffed00",
+      "valor": "3"
+    },
+    {
+      "tipo": "aluminio",
+      "color": "#ffed00",
+      "valor": "4"
+    },
+    {
+      "tipo": "aluminio",
+      "color": "#ffed00",
+      "valor": "5"
+    },
+    {
+      "tipo": "aluminio",
+      "color": "#ffed00",
+      "valor": "6"
+    },
+    {
+      "tipo": "aluminio",
+      "color": "#ffed00",
+      "valor": "7"
+    },
+    {
+      "tipo": "aluminio",
+      "color": "#ffed00",
+      "valor": "8"
+    },
+    {
+      "tipo": "aluminio",
+      "color": "#ffed00",
+      "valor": "9"
+    },
+    {
+      "tipo": "aluminio",
+      "color": "#ffed00",
+      "valor": "10"
+    },
+    {
+      "tipo": "aluminio",
+      "color": "#ffed00",
+      "valor": "J"
+    },
+    {
+      "tipo": "aluminio",
+      "color": "#ffed00",
+      "valor": "Q"
+    },
+    {
+      "tipo": "aluminio",
+      "color": "#ffed00",
+      "valor": "K"
+    },
+    {
+      "tipo": "envases",
+      "color": "#0085cb",
+      "valor": "As"
+    },
+    {
+      "tipo": "envases",
+      "color": "#0085cb",
+      "valor": "2"
+    },
+    {
+      "tipo": "envases",
+      "color": "#0085cb",
+      "valor": "3"
+    },
+    {
+      "tipo": "envases",
+      "color": "#0085cb",
+      "valor": "4"
+    },
+    {
+      "tipo": "envases",
+      "color": "#0085cb",
+      "valor": "5"
+    },
+    {
+      "tipo": "envases",
+      "color": "#0085cb",
+      "valor": "6"
+    },
+    {
+      "tipo": "envases",
+      "color": "#0085cb",
+      "valor": "7"
+    },
+    {
+      "tipo": "envases",
+      "color": "#0085cb",
+      "valor": "8"
+    },
+    {
+      "tipo": "envases",
+      "color": "#0085cb",
+      "valor": "9"
+    },
+    {
+      "tipo": "envases",
+      "color": "#0085cb",
+      "valor": "10"
+    },
+    {
+      "tipo": "envases",
+      "color": "#0085cb",
+      "valor": "J"
+    },
+    {
+      "tipo": "envases",
+      "color": "#0085cb",
+      "valor": "Q"
+    },
+    {
+      "tipo": "envases",
+      "color": "#0085cb",
+      "valor": "K"
+    }
+  ]
+}
