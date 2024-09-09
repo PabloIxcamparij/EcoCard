@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { Cards } from "../Data/Card.json";
+import { Cards } from "../data/Card.json";
 
 export const useCardStore = create(
   devtools(
@@ -9,10 +9,6 @@ export const useCardStore = create(
       handCards: [],
       selectedCards: [],
       discardCards: [],
-
-      // discardCards apartir que se hace la selccion actua
-      // como el mazo de cartas,
-      // y sera a este al que se le van quitando cartas
 
       // Acción para agregar o eliminar una carta seleccionada
       toggleCardId: (cardId) =>
@@ -54,7 +50,8 @@ export const useCardStore = create(
 
       // Función para descartar y obtener nuevas cartas aleatorias
       handleDiscardCards: () => {
-        const { selectedCards, handCards, discardCards, showNotification} = get();
+        const { selectedCards, handCards, discardCards, showNotification } =
+          get();
 
         if (selectedCards.length === 0) {
           showNotification({
@@ -173,7 +170,6 @@ export const useCardStore = create(
             show: true,
           },
         });
-
         setTimeout(() => {
           get().hideNotification();
         }, 3000);
