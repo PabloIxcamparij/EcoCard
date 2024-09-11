@@ -68,12 +68,7 @@ export default function PlaceGame() {
         <Jokers />
         <MessageHeader title={"Valor"} score={handScore} />
         <MessageHeader title={"Tipo"} score={handType} />
-      </div>
-
-      <div className="flex">
-        <h1 className="text-danger font-bold text-xl text-center">
-          Objetivo: {goolScore}
-        </h1>
+        <MessageHeader title={"Objetivo"} score={goolScore} />
       </div>
 
       <div className="flex flex-wrap justify-around items-center w-full gap-6">
