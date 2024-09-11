@@ -2,12 +2,12 @@ import { Fragment } from "react";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { Transition } from "@headlessui/react";
-import { useCardStore } from "../stores/useCardStore";
+import { useNotificationStore } from "../stores/useNotificationStore";
 
 export default function Notification() {
 
-  const notification = useCardStore((state) => state.notificacion);
-  const hideNotification = useCardStore((state) => state.hideNotification);
+  const notification = useNotificationStore((state) => state.notificacion);
+  const hideNotification = useNotificationStore((state) => state.hideNotification);
 
 
   return (

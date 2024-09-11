@@ -48,140 +48,15 @@ export const useCardStore = create(
         });
       },
 
-      // Función para descartar y obtener nuevas cartas aleatorias
-      handleDiscardCards: () => {
-        const { selectedCards, handCards, discardCards, showNotification } =
-          get();
-
-        if (selectedCards.length === 0) {
-          showNotification({
-            text: "No se ha seleccionado ninguna carta",
-            error: true,
-          });
-          return;
-        }
-
-        const remainingHandCards = handCards.filter(
-          (card) => !selectedCards.includes(card)
-        );
-
-        console.log(remainingHandCards);
-
-        // Seleccionar nuevas cartas aleatorias de discardCards
-        const shuffledDiscardCards = [...discardCards].sort(
-          () => 0.5 - Math.random()
-        );
-
-        const newCards = shuffledDiscardCards.slice(0, selectedCards.length);
-
-        // Excluir las cartas seleccionadas
-        const updatedDiscardCards = discardCards.filter(
-          (card) => !newCards.includes(card)
-        );
-
-        // Actualizar el estado con las nuevas cartas
+      // Función para cambiar las cartas en el estado
+      changeCards: (remainingHandCards, newCards, updatedDiscardCards) => {
         set({
           handCards: [...remainingHandCards, ...newCards],
           discardCards: updatedDiscardCards,
-          selectedCards: [],
+          selectedCards: [], // Resetear las cartas seleccionadas
         });
       },
-
-      // Función para comprobar que valor tiene la mano juagada
-      handlePlayCards: () => {
-        const { selectedCards, handleDiscardCards, showNotification } = get();
-
-        if (selectedCards.length === 0) {
-          showNotification({
-            text: "No se ha seleccionado ninguna carta",
-            error: true,
-          });
-          return;
-        }
-
-        // Ordenar cartas por valor
-        const sortedCards = [...selectedCards].sort(
-          (a, b) => a.valor - b.valor
-        );
-
-        // Obtener solo los valores de las cartas
-        const values = sortedCards.map((card) => card.valor);
-
-        const counts = {};
-        values.forEach((value) => {
-          counts[value] = (counts[value] || 0) + 1;
-        });
-
-        const countValues = Object.values(counts);
-
-        // Verificar las combinaciones
-
-        // Si hay una pareja y solo una combinación
-        if (countValues.includes(2) && countValues.length === 1) {
-          showNotification({
-            text: "Pareja (One Pair): 20",
-            error: false,
-          });
-        }
-
-        // Si hay dos parejas
-        else if (countValues.filter((count) => count === 2).length === 2) {
-          showNotification({
-            text: "Doble Pareja (Two Pair): 30",
-            error: false,
-          });
-        }
-
-        // Ninguna combinación
-        else if (
-          countValues.includes(1) &&
-          countValues.length === selectedCards.length
-        ) {
-          showNotification({
-            text: "Carta Alta (High Card): 10",
-            error: false,
-          });
-        }
-
-        // Mensaje de error
-        else {
-          showNotification({
-            text: "No hay una combinación válida",
-            error: true,
-          });
-        }
-
-        // Se llama al descarte de cartas para eliminar las cartas jugadas
-        handleDiscardCards();
-      },
-
-      // Funciones para mostrar la notificacion
-      notificacion: {
-        text: "",
-        error: false,
-        show: false,
-      },
-
-      showNotification: (payload) => {
-        set({
-          notificacion: {
-            text: payload.text,
-            error: payload.error,
-            show: true,
-          },
-        });
-        setTimeout(() => {
-          get().hideNotification();
-        }, 3000);
-      },
-
-      hideNotification: () => {
-        set({
-          notificacion: {
-            show: false,
-          },
-        });
-      },
+      
     }),
     { name: "CardStore" }
   )
