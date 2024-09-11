@@ -60,7 +60,7 @@ export default function PlaceGame() {
   }, [playAvailable, goolScore]);
 
   return (
-    <div className="flex flex-col justify-between items-center min-h-screen bg-[#F2E8CF] p-3 gap-4 overflow-auto text-white">
+    <div className="flex flex-col justify-around items-center min-h-screen bg-[#F2E8CF] p-3 gap-2 overflow-auto text-white">
       <Notification />
       <GameMessage isOpen={showModal} onClose={hideModal} message={message} />
 
