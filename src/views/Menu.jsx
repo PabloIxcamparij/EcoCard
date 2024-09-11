@@ -9,8 +9,7 @@ function App() {
         </div>
 
         <div className="w-5/6 flex flex-col justify-center items-center gap-8 mt-10">
-         
-          <NavLink to="/placeGame" className='w-3/5'>
+          <NavLink to="/placeGame" className="w-3/5">
             <button className="w-full  text-2xl font-bold bg-custom-green-light p-2 rounded-2xl hover:bg-custom-green-dark text-white">
               Jugar
             </button>
@@ -18,6 +17,10 @@ function App() {
 
           <button className="w-3/5 text-2xl font-bold bg-custom-green-light p-2 rounded-2xl hover:bg-custom-green-dark text-white">
             Puntajes
+          </button>
+
+          <button className="w-3/5  text-2xl font-bold bg-custom-green-light p-2 rounded-2xl hover:bg-custom-green-dark text-white">
+            Reglas
           </button>
 
           <button className="w-3/5  text-2xl font-bold bg-custom-green-light p-2 rounded-2xl hover:bg-custom-green-dark text-white">

@@ -13,6 +13,8 @@ export const useGameStore = create(
       playAvailable: 3,
       discardAvailable: 3,
       goolScore: 200,
+      handScore: 0,
+      handType: "",
       gameWin: false,
       passPhase: false,
 
@@ -63,16 +65,24 @@ export const useGameStore = create(
       },
 
       // Función para jugar las cartas seleccionadas
-      handlePlayCards: () => {
+      handlePlayCards: (type) => {
         const { selectedCards } = useCardStore.getState();
         const { playAvailable, goolScore } = get();
         const { showNotification } = useNotificationStore.getState();
 
         if (selectedCards.length === 0) {
-          showNotification({
-            text: "No se ha seleccionado ninguna carta",
-            error: true,
+          if (type === 0) {
+            showNotification({
+              text: "No se ha seleccionado ninguna carta",
+              error: true,
+            });
+          }
+
+          set({
+            handScore: 0,
+            handType: "Ninguno",
           });
+
           return;
         }
 
@@ -94,72 +104,69 @@ export const useGameStore = create(
         const totalScore = calculateTotalScore(selectedCards);
 
         if (countValues.includes(2) && countValues.length === 1) {
-          showNotification({
-            text: "Par de cartas (One Pair): " + totalScore * 3,
-            error: false,
-          });
           typeScore = totalScore * 3;
-        } else if (countValues.filter((count) => count === 2).length === 2) {
-          showNotification({
-            text: "Doble Par (Two Pair): " + totalScore * 4,
-            error: false,
+
+          set({
+            handScore: typeScore,
+            handType: "Par",
           });
+        } else if (countValues.filter((count) => count === 2).length === 2) {
           typeScore = totalScore * 4;
+
+          set({
+            handScore: typeScore,
+            handType: "2 Par",
+          });
+        } else if (countValues.includes(3) && countValues.length === 1) {
+          typeScore = totalScore * 5;
+
+          set({
+            handScore: typeScore,
+            handType: "3 valores",
+          });
+        } else if (new Set(colors).size === 1 && countValues.length === 3) {
+          typeScore = totalScore * 5;
+
+          set({
+            handScore: typeScore,
+            handType: "3 colores",
+          });
+        } else if (new Set(colors).size === 1 && selectedCards.length === 5) {
+          // Verifica si todas las cartas tienen el mismo color para 5 colores
+          typeScore = totalScore * 6;
+
+          set({
+            handScore: typeScore,
+            handType: "5 colores",
+          });
+        } else if (countValues.includes(3) && countValues.includes(2)) {
+          typeScore = totalScore * 7;
+
+          set({
+            handScore: typeScore,
+            handType: "Full House ",
+          });
         } else if (
           countValues.includes(1) &&
           countValues.length === selectedCards.length
         ) {
-          showNotification({
-            text: "Carta Alta (High Card): " + totalScore * 2,
-            error: false,
-          });
           typeScore = totalScore * 2;
-        } else if (countValues.includes(3) && countValues.length === 1) {
-          showNotification({
-            text: "3 de cartas iguales (Tree Card Same): " + totalScore * 5,
-            error: false,
-          });
-          typeScore = totalScore * 5;
-        } else if (new Set(colors).size === 1 && countValues.length === 3) {
-          showNotification({
-            text:
-              "3 de cartas del mismo color (Tree Card Color): " +
-              totalScore * 5,
-            error: false,
-          });
-          typeScore = totalScore * 5;
-        } else if (new Set(colors).size === 1 && countValues.length === 5) {
-          showNotification({
-            text:
-              "5 de cartas del mismo color (Five Card Color): " +
-              totalScore * 6,
-            error: false,
-          });
-          typeScore = totalScore * 6;
-        } else if (countValues.includes(3) && countValues.includes(2)) {
-          showNotification({
-            text:
-              "Full House (2 cartas iguales y 3 cartas iguales): " +
-              totalScore * 7,
-            error: false,
-          });
-          typeScore = totalScore * 7;
-        } else {
-          showNotification({
-            text: "No hay una combinación válida",
-            error: true,
+
+          set({
+            handScore: typeScore,
+            handType: "Carta alta",
           });
         }
 
-        set({
-          playAvailable: playAvailable - 1,
-          goolScore: goolScore - typeScore,
-        });
+        if (type === 0) {
+          set({
+            goolScore: goolScore - typeScore,
+            playAvailable: playAvailable - 1,
+          });
 
-        // Llama a la función de descartar cartas
-        get().handleDiscardCards(1);
+          get().handleDiscardCards(1);
+        }
       },
-
     }),
     { name: "GameStore" }
   )
