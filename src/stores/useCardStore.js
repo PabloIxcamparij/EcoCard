@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { Cards } from "../data/Card.json";
+import { Cards } from "../json/Card.json";
 
 export const useCardStore = create(
   devtools(

@@ -7,6 +7,7 @@ import MessageHeader from "../components/MessageHeader";
 import { Button } from "@nextui-org/react";
 import { useCardStore } from "../stores/useCardStore";
 import { useGameStore } from "../stores/useGameStore";
+import { useNotificationStore } from "../stores/useNotificationStore";
 
 export default function PlaceGame() {
   const { selectRandomCards } = useCardStore((state) => ({
@@ -27,28 +28,28 @@ export default function PlaceGame() {
     goolScore: state.goolScore,
   }));
 
-  const [showModal, setShowModal] = useState(false);
+  const { showModal, message, hideModal } = useNotificationStore((state) => ({
+    showModal: state.showModal,
+    message: state.message,
+    hideModal: state.hideModal,
+  }));
 
   useEffect(() => {
     selectRandomCards();
   }, [selectRandomCards]);
 
-  // Efecto que escucha los cambios en discardAvailable
   useEffect(() => {
     if (playAvailable === 0 && goolScore > 0) {
-      setShowModal(true);
+      useNotificationStore.getState().showModalWithMessage("Perdido");
+    } else if (goolScore <= 0) {
+      useNotificationStore.getState().showModalWithMessage("Ganado");
     }
-  }, [playAvailable]);
-
-  // Función para cerrar el modal
-  const closeModal = () => {
-    setShowModal(false);
-  };
+  }, [playAvailable, goolScore]);
 
   return (
     <div className="flex flex-col justify-between items-center min-h-screen bg-[#F2E8CF] p-3 overflow-auto text-white">
       <Notification />
-      <GameMessage isOpen={showModal} onClose={closeModal} message="Perdido" />
+      <GameMessage isOpen={showModal} onClose={hideModal} message={message} />
 
       <div className="flex justify-between w-full items-center p-5">
         <Jokers />
