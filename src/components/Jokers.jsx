@@ -13,9 +13,7 @@ import {
 } from "@nextui-org/react";
 
 import { Rules } from "../json/Rules";
-import { HomeIcon } from "@heroicons/react/20/solid";
-import { Bars3Icon } from "@heroicons/react/20/solid";
-import { ArrowPathIcon } from "@heroicons/react/20/solid";
+import { HomeIcon, Bars3Icon, ArrowPathIcon  } from "@heroicons/react/20/solid";
 
 export default function Jokers() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -67,10 +65,9 @@ export default function Jokers() {
                   >
                     Comodines
                   </AccordionItem>
-                  <AccordionItem key="2" aria-label="Reglas" title="Reglas">
+                  <AccordionItem key="2" aria-label="Manos" title="Manos">
                     <div className="flex flex-col gap-3">
-                      <h1 className="font-bold text-center">
-                        {" "}
+                      <h1 className="font-bold text-center text-custom-green-dark">
                         Juegos de manos reconocibles
                       </h1>
 

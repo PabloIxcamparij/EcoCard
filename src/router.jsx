@@ -3,20 +3,39 @@ import { lazy, Suspense } from "react";
 
 import IndexPage from "./views/Menu";
 
-const PlaceGame = lazy(() => import("./views/PlaceGame"));
+const ViewGame = lazy(() => import("./views/ViewGame"));
+const ViewRules = lazy(() => import("./views/ViewRules"));
+const ViewScore = lazy(() => import("./views/ViewScore"));
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-
         <Route path="/" element={<IndexPage />} index />
 
         <Route
-          path="/placeGame"
+          path="/viewGame"
           element={
             <Suspense fallback="Cargando ...">
-              <PlaceGame />
+              <ViewGame />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/viewRules"
+          element={
+            <Suspense fallback="Cargando ...">
+              <ViewRules />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/viewScore"
+          element={
+            <Suspense fallback="Cargando ...">
+              <ViewScore />
             </Suspense>
           }
         />

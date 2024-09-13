@@ -13,7 +13,7 @@ import { useCardStore } from "../stores/useCardStore";
 import { useGameStore } from "../stores/useGameStore";
 import { useNotificationStore } from "../stores/useNotificationStore";
 
-export default function PlaceGame() {
+export default function ViewGame() {
   const { selectRandomCards, selectedCards } = useCardStore((state) => ({
     selectRandomCards: state.selectRandomCards,
     selectedCards: state.selectedCards,

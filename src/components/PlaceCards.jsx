@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useCardStore } from "../stores/useCardStore";
 
 function PlaceCards() {
@@ -22,7 +22,7 @@ function PlaceCards() {
               onClick={() => toggleCardId(card)}
               className={`flex justify-center items-center w-20 h-28 rounded-lg transition-transform duration-200 ease-in-out ${
                 selectedCards.includes(card)
-                  ? "transform scale-110 shadow-lg"
+                  ? "transform scale-110 shadow-lg border-4 border-custom-white"
                   : ""
               } `}
               style={{ backgroundColor: card.color }}
@@ -31,9 +31,8 @@ function PlaceCards() {
             </div>
           ))}
         </div>
-
     </div>
-  )
+  );
 }
 
-export default PlaceCards
+export default PlaceCards;
