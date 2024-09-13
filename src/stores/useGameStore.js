@@ -14,6 +14,9 @@ export const useGameStore = create(
       discardAvailable: 3,
       goolScore: 200,
       handScore: 0,
+      finalScore: 0,
+      savedMatchWinsScores: [],
+      savedMatchLotScores: [],
       handType: "",
       gameWin: false,
       passPhase: false,
@@ -67,7 +70,7 @@ export const useGameStore = create(
       // Función para jugar las cartas seleccionadas
       handlePlayCards: (type) => {
         const { selectedCards } = useCardStore.getState();
-        const { playAvailable, goolScore } = get();
+        const { playAvailable, goolScore, finalScore } = get();
         const { showNotification } = useNotificationStore.getState();
 
         if (selectedCards.length === 0) {
@@ -162,10 +165,37 @@ export const useGameStore = create(
           set({
             goolScore: goolScore - typeScore,
             playAvailable: playAvailable - 1,
+            finalScore: finalScore + typeScore, // Acumular el nuevo puntaje
           });
 
           get().handleDiscardCards(1);
         }
+      },
+
+      saveScore: (type) => {
+        const { finalScore } = get();
+
+        if (type === 0) {
+          const scores = JSON.parse(localStorage.getItem("winsScore")) || [];
+          scores.push(finalScore);
+          localStorage.setItem("winsScore", JSON.stringify(scores));
+        } else {
+          const scores = JSON.parse(localStorage.getItem("lostScore")) || [];
+          scores.push(finalScore);
+          localStorage.setItem("lostScore", JSON.stringify(scores));
+        }
+      },
+
+      loadScore: () => {
+        const savedWinsScores =
+          JSON.parse(localStorage.getItem("winsScore")) || [];
+        const savedLostScores =
+          JSON.parse(localStorage.getItem("lostScore")) || [];
+
+        set({
+          savedMatchWinsScores: savedWinsScores,
+          savedMatchLotScores: savedLostScores,
+        });
       },
     }),
     { name: "GameStore" }

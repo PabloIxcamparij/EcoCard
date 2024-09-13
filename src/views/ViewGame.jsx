@@ -27,6 +27,7 @@ export default function ViewGame() {
     goolScore,
     handScore,
     handType,
+    saveScore,
   } = useGameStore((state) => ({
     handleDiscardCards: state.handleDiscardCards,
     handlePlayCards: state.handlePlayCards,
@@ -35,6 +36,7 @@ export default function ViewGame() {
     goolScore: state.goolScore,
     handScore: state.handScore,
     handType: state.handType,
+    saveScore: state.saveScore
   }));
 
   const { showModal, message, hideModal } = useNotificationStore((state) => ({
@@ -54,8 +56,10 @@ export default function ViewGame() {
   useEffect(() => {
     if (playAvailable === 0 && goolScore > 0) {
       useNotificationStore.getState().showModalWithMessage("Perdido");
+      saveScore(1)
     } else if (goolScore <= 0) {
       useNotificationStore.getState().showModalWithMessage("Ganado");
+      saveScore(0)
     }
   }, [playAvailable, goolScore]);
 

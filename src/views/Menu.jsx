@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 function App() {
+
   return (
     <>
       <div className="relative flex flex-col justify-center items-center w-screen h-screen bg-[#F2E8CF] p-5 gap-8 overflow-hidden">
