@@ -13,7 +13,7 @@ import {
 } from "@nextui-org/react";
 
 import { Rules } from "../json/Rules";
-import { HomeIcon, Bars3Icon, ArrowPathIcon  } from "@heroicons/react/20/solid";
+import { HomeIcon, Bars3Icon, ArrowPathIcon } from "@heroicons/react/20/solid";
 
 export default function Jokers() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -33,6 +33,7 @@ export default function Jokers() {
           backdrop:
             "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20",
         }}
+        className="w-5/6"
       >
         <ModalContent>
           {(onClose) => (
@@ -73,8 +74,10 @@ export default function Jokers() {
 
                       {Rules.map((rule, index) => (
                         <div key={index} className="flex items-center gap-4">
-                          <span className="font-bold">{rule.title}:</span>
-                          {rule.body}
+                          <h1>
+                            <span className="font-bold">{rule.title}: </span>
+                            {rule.body}{" "}
+                          </h1>
                         </div>
                       ))}
                     </div>

@@ -68,8 +68,10 @@ export default function ViewRules() {
 
       {Rules.map((rule, index) => (
         <div key={index} className="flex items-center gap-4">
-          <span className="font-bold">{rule.title}:</span>
-          {rule.body}
+          <h1>
+            <span className="font-bold">{rule.title}: </span>
+            {rule.body}{" "}
+          </h1>
         </div>
       ))}
     </div>

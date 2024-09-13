@@ -83,7 +83,7 @@ export const useGameStore = create(
 
           set({
             handScore: 0,
-            handType: "Ninguno",
+            handType: "---",
           });
 
           return;
