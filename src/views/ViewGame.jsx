@@ -64,11 +64,12 @@ export default function ViewGame() {
   }, [playAvailable, goolScore]);
 
   return (
-    <div className="flex flex-col justify-around items-center min-h-screen bg-[#F2E8CF] p-3 gap-2 overflow-auto text-white">
+    <div className="flex flex-col justify-around items-center min-h-screen bg-[#F2E8CF] p-3 gap-10 overflow-auto text-white">
+     
       <Notification />
       <GameMessage isOpen={showModal} onClose={hideModal} message={message} />
 
-      <div className="flex justify-between w-full items-center mr-5">
+      <div className="flex justify-between w-full items-center mr-5 mt-5">
         <Jokers />
         <MessageHeader title={"Valor"} score={handScore} />
         <MessageHeader title={"Tipo"} score={handType} />
