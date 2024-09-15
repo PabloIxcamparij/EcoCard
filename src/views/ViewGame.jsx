@@ -15,8 +15,9 @@ import { useGameStore } from "../stores/useGameStore";
 import { useNotificationStore } from "../stores/useNotificationStore";
 
 export default function ViewGame() {
-  const { selectRandomCards, selectedCards } = useCardStore((state) => ({
+  const { selectRandomCards, selectedCards, restarGameCards } = useCardStore((state) => ({
     selectRandomCards: state.selectRandomCards,
+    restarGameCards: state.restarGameCards,
     selectedCards: state.selectedCards,
   }));
 
@@ -25,19 +26,23 @@ export default function ViewGame() {
     handlePlayCards,
     discardAvailable,
     playAvailable,
-    goolScore,
+    goalScore,
     handScore,
     handType,
+    nextGame,
     saveScore,
+    restarGame
   } = useGameStore((state) => ({
     handleDiscardCards: state.handleDiscardCards,
     handlePlayCards: state.handlePlayCards,
     discardAvailable: state.discardAvailable,
     playAvailable: state.playAvailable,
-    goolScore: state.goolScore,
+    goalScore: state.goalScore,
     handScore: state.handScore,
     handType: state.handType,
     saveScore: state.saveScore,
+    nextGame: state.nextGame,
+    restarGame: state.restarGame
   }));
 
   const { showModal, message, hideModal } = useNotificationStore((state) => ({
@@ -47,22 +52,26 @@ export default function ViewGame() {
   }));
 
   useEffect(() => {
-    selectRandomCards();
-  }, [selectRandomCards]);
+    selectRandomCards()
+  }, [selectRandomCards])
 
   useEffect(() => {
     handlePlayCards(1);
   }, [selectedCards]);
 
   useEffect(() => {
-    if (playAvailable === 0 && goolScore > 0) {
+    if (playAvailable === 0 && goalScore > 0) {
       useNotificationStore.getState().showModalWithMessage("Perdido");
-      saveScore(1);
-    } else if (goolScore <= 0) {
-      useNotificationStore.getState().showModalWithMessage("Ganado");
-      saveScore(0);
+      restarGameCards()
+      restarGame()
+      // saveScore(1);
+    } else if (goalScore <= 0) {
+      useNotificationStore.getState().showModalWithMessage("Pasado al siguiente nivel");
+      restarGameCards()
+      nextGame()
+      // saveScore(0);
     }
-  }, [playAvailable, goolScore]);
+  }, [playAvailable]);
 
   // Sound for activating and deactivating cards
   const activationSound = new Howl({
@@ -82,7 +91,7 @@ export default function ViewGame() {
       </div>
 
       <div className="w-full text-danger font-bold text-xl text-center mt-5">
-        <h1>{"Objetivo:"} {goolScore}</h1>
+        <h1>{"Objetivo:"} {goalScore}</h1>
       </div>
 
       <div className="flex flex-wrap justify-around items-center w-full gap-6 mt-5">

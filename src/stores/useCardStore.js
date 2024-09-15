@@ -56,6 +56,17 @@ export const useCardStore = create(
           selectedCards: [], // Resetear las cartas seleccionadas
         });
       },
+
+      restarGameCards: () => {
+        
+        set({
+          handCards: [],
+          discardCards: [],
+          selectedCards: []
+        })
+
+        get().selectRandomCards()
+      }
       
     }),
     { name: "CardStore" }

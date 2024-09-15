@@ -12,7 +12,13 @@ export const useGameStore = create(
     (set, get) => ({
       playAvailable: 3,
       discardAvailable: 3,
-      goolScore: 200,
+      nevelsGoal:[
+        300, 350, 500, 700,
+        800, 1000, 1050, 1200, 1400,
+        1500, 1600, 1650, 1800, 2000
+      ], //All nevels of the game
+      currentLevel: 0, //Current position in the game
+      goalScore: 200, //First level is 200
       handScore: 0,
       finalScore: 0,
       savedMatchWinsScores: [],
@@ -69,9 +75,10 @@ export const useGameStore = create(
 
       // Función para jugar las cartas seleccionadas
       handlePlayCards: (type) => {
+        
         const { selectedCards } = useCardStore.getState();
-        const { playAvailable, goolScore, finalScore } = get();
         const { showNotification } = useNotificationStore.getState();
+        const { playAvailable, goalScore, finalScore } = get();
 
         if (selectedCards.length === 0) {
           if (type === 0) {
@@ -163,7 +170,7 @@ export const useGameStore = create(
 
         if (type === 0) {
           set({
-            goolScore: goolScore - typeScore,
+            goalScore: goalScore - typeScore,
             playAvailable: playAvailable - 1,
             finalScore: finalScore + typeScore, // Acumular el nuevo puntaje
           });
@@ -197,6 +204,29 @@ export const useGameStore = create(
           savedMatchLotScores: savedLostScores,
         });
       },
+
+      nextGame: () =>{
+        const { nevelsGoal, currentLevel } = get();
+
+        set({
+          goalScore: nevelsGoal[currentLevel],
+          discardAvailable: 3,
+          playAvailable: 3,
+          currentLevel: currentLevel + 1,
+        })
+        
+      },
+
+      restarGame: () => {
+
+        set({
+          goalScore: 200,
+          discardAvailable: 3,
+          playAvailable: 3,
+          currentLevel: 0,
+        })
+      }
+
     }),
     { name: "GameStore" }
   )
