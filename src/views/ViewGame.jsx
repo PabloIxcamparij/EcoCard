@@ -15,7 +15,7 @@ import { useGameStore } from "../stores/useGameStore";
 import { useNotificationStore } from "../stores/useNotificationStore";
 
 export default function ViewGame() {
-  const { selectRandomCards, selectedCards, restarGameCards } = useCardStore((state) => ({
+  const { selectedCards, restarGameCards } = useCardStore((state) => ({
     selectRandomCards: state.selectRandomCards,
     restarGameCards: state.restarGameCards,
     selectedCards: state.selectedCards,
@@ -52,8 +52,11 @@ export default function ViewGame() {
   }));
 
   useEffect(() => {
-    selectRandomCards()
-  }, [selectRandomCards])
+    restarGameCards()
+    restarGame()
+    console.log("Se ha reset levels")
+
+  }, [])
 
   useEffect(() => {
     handlePlayCards(1);
