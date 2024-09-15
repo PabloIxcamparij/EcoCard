@@ -19,7 +19,7 @@ export default function ViewScore() {
   }, []);
 
   return (
-    <div className="h-screen">
+    <div className="h-screen bg-custom-white p-5">
       <NavLink to="/" className="w-3/5">
       <Button className="bg-transparent">
           <HomeIcon className="h-10 w-10 text-custom-green-dark" />
@@ -42,7 +42,7 @@ export default function ViewScore() {
         </ul>
       </div>
 
-      <div className="mt-5">
+      <div className="mt-5 mb-5">
         <h2 className="text-xl font-bold text-center">Perdidas</h2>
         <ul className="list-disc ml-5">
           {savedMatchLotScores && savedMatchLotScores.length > 0 ? (
@@ -56,6 +56,7 @@ export default function ViewScore() {
           )}
         </ul>
       </div>
+
     </div>
   );
 }

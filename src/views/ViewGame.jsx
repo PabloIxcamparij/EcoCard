@@ -71,7 +71,7 @@ export default function ViewGame() {
   });
 
   return (
-    <div className="flex flex-col items-center h-screen text-white gap-5">
+    <div className="flex flex-col items-center h-screen text-white bg-custom-white gap-5 p-3">
       <Notification />
       <GameMessage isOpen={showModal} onClose={hideModal} message={message} />
 

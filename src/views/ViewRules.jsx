@@ -6,7 +6,7 @@ import { HomeIcon } from "@heroicons/react/20/solid";
 
 export default function ViewRules() {
   return (
-    <>
+    <div className="bg-custom-white p-4 ">
       <NavLink to="/" className="w-3/5">
         <Button className="bg-transparent">
           <HomeIcon className="h-10 w-10 text-custom-green-dark" />
@@ -70,7 +70,7 @@ export default function ViewRules() {
         </article>
       </div>
 
-      <div>
+      <div className="mb-5">
 
         <h1 className="text-2xl font-bold text-center text-custom-green-dark">
           Juegos de manos reconocibles
@@ -88,6 +88,6 @@ export default function ViewRules() {
         ))}
       </div>
 
-    </>
+    </div>
   );
 }
