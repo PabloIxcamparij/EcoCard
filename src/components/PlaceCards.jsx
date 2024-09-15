@@ -11,12 +11,12 @@ export default function PlaceCards() {
 
   // Sound for activating and deactivating cards
   const activationSound = new Howl({
-    src: ["/public/Effect-Card-Start.mp3"],
+    src: ["/songs/Effect-Card-Start.mp3"],
     volume: 0.5,
   });
 
   const deactivationSound = new Howl({
-    src: ["/public/Effect-Card-End.mp3"],
+    src: ["/songs/Effect-Card-End.mp3"],
     volume: 2.0,
   });
 

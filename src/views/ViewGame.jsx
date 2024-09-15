@@ -66,7 +66,7 @@ export default function ViewGame() {
 
   // Sound for activating and deactivating cards
   const activationSound = new Howl({
-    src: ["/public/Effect-Card-Start.mp3"],
+    src: ["/songs/Effect-Card-Start.mp3"],
     volume: 0.5,
   });
 
@@ -81,11 +81,11 @@ export default function ViewGame() {
         <MessageHeader title={"Tipo"} score={handType} />
       </div>
 
-      <div className="w-full text-danger font-bold text-xl text-center">
+      <div className="w-full text-danger font-bold text-xl text-center mt-5">
         <h1>{"Objetivo:"} {goolScore}</h1>
       </div>
 
-      <div className="flex flex-wrap justify-around items-center w-full gap-6">
+      <div className="flex flex-wrap justify-around items-center w-full gap-6 mt-5">
         <Button
           className="rounded-full w-2/5 font-bold text-xl"
           color="danger"
