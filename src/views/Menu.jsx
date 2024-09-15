@@ -1,21 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { Howl } from 'howler';
-import { useEffect } from "react";
-
 
 function App() {
 
-  const backgroundMusic = new Howl({
-    src: ['/public/OST.mp3'],
-    loop: true, // To keep it playing continuously
-    volume: 0.2 // Adjust volume as needed
-  });
-  
-  backgroundMusic.play();
-
   return (
     <>
-      <div className="relative flex flex-col justify-center items-center w-full h-screen bg-[#F2E8CF] p-5 gap-8 overflow-hidden">
+      <div className="flex flex-col items-center justify-center h-screen">
+
         <div className="w-5/6 bg-custom-green-light flex justify-center items-center rounded-3xl p-5 border-b-8 border-r-8 border-custom-green-dark text-white">
           <h1 className="text-4xl font-bold text-wrap text-center">Eco Card</h1>
         </div>

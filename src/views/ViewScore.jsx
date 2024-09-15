@@ -19,10 +19,10 @@ export default function ViewScore() {
   }, []);
 
   return (
-    <div className="flex flex-col bg-custom-white h-screen gap-3 p-5">
+    <div className="h-screen">
       <NavLink to="/" className="w-3/5">
-        <Button className="bg-custom-green-light">
-          <HomeIcon className="h-10 w-10 text-white" />
+      <Button className="bg-transparent">
+          <HomeIcon className="h-10 w-10 text-custom-green-dark" />
         </Button>
       </NavLink>
       <h1 className="text-2xl font-bold text-center"> Puntajes registrados </h1>
@@ -37,7 +37,7 @@ export default function ViewScore() {
               </li>
             ))
           ) : (
-            <li>No puntajes guardados</li>
+            <li>No hay puntajes guardados</li>
           )}
         </ul>
       </div>
@@ -52,7 +52,7 @@ export default function ViewScore() {
               </li>
             ))
           ) : (
-            <li>No puntajes guardados</li>
+            <li>No hay puntajes guardados</li>
           )}
         </ul>
       </div>

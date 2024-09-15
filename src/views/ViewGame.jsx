@@ -71,15 +71,18 @@ export default function ViewGame() {
   });
 
   return (
-    <div className="flex flex-col justify-around items-center min-h-screen bg-[#F2E8CF] p-3 gap-10 overflow-auto text-white">
+    <div className="flex flex-col items-center h-screen text-white gap-5">
       <Notification />
       <GameMessage isOpen={showModal} onClose={hideModal} message={message} />
 
-      <div className="flex justify-between w-full items-center mr-5 mt-5">
+      <div className="flex justify-around items-center w-full">
         <Jokers />
         <MessageHeader title={"Valor"} score={handScore} />
         <MessageHeader title={"Tipo"} score={handType} />
-        <MessageHeader title={"Objetivo"} score={goolScore} />
+      </div>
+
+      <div className="w-full text-danger font-bold text-xl text-center">
+        <h1>{"Objetivo:"} {goolScore}</h1>
       </div>
 
       <div className="flex flex-wrap justify-around items-center w-full gap-6">
@@ -94,7 +97,7 @@ export default function ViewGame() {
         >
           {discardAvailable}
         </Button>
-        
+
         <Button
           className="rounded-full w-2/5 font-bold text-xl"
           color="success"
