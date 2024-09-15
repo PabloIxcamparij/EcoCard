@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Button } from "@nextui-org/react";
+import { Howl } from "howler";
 
 // Componentes
 import Jokers from "../components/Jokers";
@@ -36,7 +37,7 @@ export default function ViewGame() {
     goolScore: state.goolScore,
     handScore: state.handScore,
     handType: state.handType,
-    saveScore: state.saveScore
+    saveScore: state.saveScore,
   }));
 
   const { showModal, message, hideModal } = useNotificationStore((state) => ({
@@ -56,16 +57,21 @@ export default function ViewGame() {
   useEffect(() => {
     if (playAvailable === 0 && goolScore > 0) {
       useNotificationStore.getState().showModalWithMessage("Perdido");
-      saveScore(1)
+      saveScore(1);
     } else if (goolScore <= 0) {
       useNotificationStore.getState().showModalWithMessage("Ganado");
-      saveScore(0)
+      saveScore(0);
     }
   }, [playAvailable, goolScore]);
 
+  // Sound for activating and deactivating cards
+  const activationSound = new Howl({
+    src: ["/public/Effect-Card-Start.mp3"],
+    volume: 0.5,
+  });
+
   return (
     <div className="flex flex-col justify-around items-center min-h-screen bg-[#F2E8CF] p-3 gap-10 overflow-auto text-white">
-     
       <Notification />
       <GameMessage isOpen={showModal} onClose={hideModal} message={message} />
 
@@ -81,15 +87,22 @@ export default function ViewGame() {
           className="rounded-full w-2/5 font-bold text-xl"
           color="danger"
           variant="ghost"
-          onClick={() => handleDiscardCards(0)}
+          onClick={() => {
+            handleDiscardCards(0);
+            activationSound.play();
+          }}
         >
           {discardAvailable}
         </Button>
+        
         <Button
           className="rounded-full w-2/5 font-bold text-xl"
           color="success"
           variant="ghost"
-          onClick={() => handlePlayCards(0)}
+          onClick={() => {
+            handlePlayCards(0);
+            activationSound.play();
+          }}
         >
           {playAvailable}
         </Button>

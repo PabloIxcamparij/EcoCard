@@ -1,6 +1,17 @@
 import { NavLink } from "react-router-dom";
+import { Howl } from 'howler';
+import { useEffect } from "react";
+
 
 function App() {
+
+  const backgroundMusic = new Howl({
+    src: ['/public/OST.mp3'],
+    loop: true, // To keep it playing continuously
+    volume: 0.2 // Adjust volume as needed
+  });
+  
+  backgroundMusic.play();
 
   return (
     <>
