@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
-import { Button } from "@nextui-org/react";
+
 import { Howl } from "howler";
+import { Button } from "@nextui-org/react";
+import { Bars3Icon } from "@heroicons/react/20/solid";
 
 // Componentes
 import Jokers from "../components/Jokers";
@@ -18,7 +20,7 @@ export default function ViewGame() {
   const { selectedCards, restarGameCards } = useCardStore((state) => ({
     selectRandomCards: state.selectRandomCards,
     restarGameCards: state.restarGameCards,
-    selectedCards: state.selectedCards,
+    selectedCards: state.selectedCards
   }));
 
   const {
@@ -31,7 +33,7 @@ export default function ViewGame() {
     handType,
     nextGame,
     saveScore,
-    restarGame
+    restarGame,
   } = useGameStore((state) => ({
     handleDiscardCards: state.handleDiscardCards,
     handlePlayCards: state.handlePlayCards,
@@ -42,21 +44,22 @@ export default function ViewGame() {
     handType: state.handType,
     saveScore: state.saveScore,
     nextGame: state.nextGame,
-    restarGame: state.restarGame
+    restarGame: state.restarGame,
   }));
 
-  const { showModal, message, hideModal } = useNotificationStore((state) => ({
-    showModal: state.showModal,
-    message: state.message,
-    hideModal: state.hideModal,
-  }));
+  const { showModal, showModalJokers, message, hideModal, hideModalJoker } =
+    useNotificationStore((state) => ({
+      showModalJokers: state.showModalJokers,
+      hideModalJoker: state.hideModalJoker,
+      hideModal: state.hideModal,
+      showModal: state.showModal,
+      message: state.message,
+    }));
 
   useEffect(() => {
-    restarGameCards()
-    restarGame()
-    console.log("Se ha reset levels")
-
-  }, [])
+    restarGameCards();
+    restarGame();
+  }, []);
 
   useEffect(() => {
     handlePlayCards(1);
@@ -65,18 +68,20 @@ export default function ViewGame() {
   useEffect(() => {
     if (playAvailable === 0 && goalScore > 0) {
       useNotificationStore.getState().showModalWithMessage("Perdido");
-      restarGameCards()
-      restarGame()
-      // saveScore(1);
+      restarGameCards();
+      restarGame();
+      saveScore(1);
     } else if (goalScore <= 0) {
-      useNotificationStore.getState().showModalWithMessage("Pasado al siguiente nivel");
-      restarGameCards()
-      nextGame()
-      // saveScore(0);
+      useNotificationStore
+        .getState()
+        .showModalWithMessage("Pasado al siguiente nivel");
+      restarGameCards();
+      nextGame();
+      saveScore(0);
     }
   }, [playAvailable]);
 
-  // Sound for activating and deactivating cards
+  // Sound for activating button
   const activationSound = new Howl({
     src: ["/songs/Effect-Card-Start.mp3"],
     volume: 0.5,
@@ -88,16 +93,28 @@ export default function ViewGame() {
       <GameMessage isOpen={showModal} onClose={hideModal} message={message} />
 
       <div className="flex justify-around items-center w-full">
-        <Jokers />
+        
+        <Button
+          className="bg-transparent"
+          onClick={() => {
+            useNotificationStore.getState().showModalJoker();
+          }}
+        >
+          <Bars3Icon className="h-10 w-10 text-custom-gray" />
+          <Jokers isOpen={showModalJokers} onClose={hideModalJoker} />
+        </Button>
+
         <MessageHeader title={"Valor"} score={handScore} />
         <MessageHeader title={"Tipo"} score={handType} />
       </div>
 
       <div className="w-full text-danger font-bold text-xl text-center mt-5">
-        <h1>{"Objetivo:"} {goalScore}</h1>
+        <h1>
+          {"Objetivo:"} {goalScore}
+        </h1>
       </div>
 
-      <div className="flex flex-wrap justify-around items-center w-full gap-6 mt-5">
+      <div className="flex flex-wrap justify-around items-center w-full gap-6 mt-5 mb-5">
         <Button
           className="rounded-full w-2/5 font-bold text-xl"
           color="danger"

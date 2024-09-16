@@ -10,10 +10,13 @@ export const useNotificationStore = create(
         error: false,
         show: false,
       },
-      
+
       // Estado del modal
       showModal: false,
       message: "",
+
+      // Estado del modal Jokers
+      showModalJokers: false,
 
       // Función para mostrar notificación
       showNotification: (payload) => {
@@ -44,6 +47,16 @@ export const useNotificationStore = create(
           showModal: true,
           message,
         });
+
+        setTimeout(() => {
+          get().hideModal();
+        }, 1500);
+      },
+
+      showModalJoker: () => {
+        set({
+          showModalJokers: true,
+        });
       },
 
       // Función para ocultar el modal
@@ -51,6 +64,13 @@ export const useNotificationStore = create(
         set({
           showModal: false,
           message: "",
+        });
+      },
+
+      // Función para ocultar el modal Joker
+      hideModalJoker: () => {
+        set({
+          showModalJokers: false,
         });
       },
     }),
