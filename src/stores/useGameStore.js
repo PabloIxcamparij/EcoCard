@@ -123,21 +123,21 @@ export const useGameStore = create(
 
           set({
             handScore: typeScore,
-            handType: "2 Par",
+            handType: "Doble Par",
           });
         } else if (countValues.includes(3) && countValues.length === 1) {
           typeScore = totalScore * 5;
 
           set({
             handScore: typeScore,
-            handType: "3 valores",
+            handType: "Trio valores",
           });
         } else if (new Set(colors).size === 1 && countValues.length === 3) {
           typeScore = totalScore * 5;
 
           set({
             handScore: typeScore,
-            handType: "3 colores",
+            handType: "Trio colores",
           });
         } else if (new Set(colors).size === 1 && selectedCards.length === 5) {
           // Verifica si todas las cartas tienen el mismo color para 5 colores
@@ -145,14 +145,14 @@ export const useGameStore = create(
 
           set({
             handScore: typeScore,
-            handType: "5 colores",
+            handType: "Quintento colores",
           });
         } else if (countValues.includes(3) && countValues.includes(2)) {
           typeScore = totalScore * 7;
 
           set({
             handScore: typeScore,
-            handType: "Full House ",
+            handType: "Casa Llena ",
           });
         } else if (
           countValues.includes(1) &&
@@ -177,6 +177,7 @@ export const useGameStore = create(
         }
       },
 
+      // Salva en localStore las puntuaciones
       saveScore: (type) => {
         const { finalScore } = get();
 
@@ -191,6 +192,7 @@ export const useGameStore = create(
         }
       },
 
+      // Carga de localStore las puntuaciones
       loadScore: () => {
         const savedWinsScores =
           JSON.parse(localStorage.getItem("winsScore")) || [];
@@ -203,6 +205,7 @@ export const useGameStore = create(
         });
       },
 
+      // Hace que se resetee varios elementos y cambiar la puntuacion objetivo
       nextGame: () =>{
         const { nevelsGoal, currentLevel } = get();
 
@@ -212,9 +215,9 @@ export const useGameStore = create(
           playAvailable: 3,
           currentLevel: currentLevel + 1,
         })
-        
       },
 
+      // Resetea el juego a sus valores origniales
       restarGame: () => {
         set({
           goalScore: 200,

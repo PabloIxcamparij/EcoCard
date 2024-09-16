@@ -4,11 +4,10 @@ import { XMarkIcon } from "@heroicons/react/20/solid";
 import { Transition } from "@headlessui/react";
 import { useNotificationStore } from "../stores/useNotificationStore";
 
-export default function Notification() {
+export default function NotificationGeneral() {
 
   const notification = useNotificationStore((state) => state.notificacion);
   const hideNotification = useNotificationStore((state) => state.hideNotification);
-
 
   return (
     <div

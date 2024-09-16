@@ -5,11 +5,11 @@ import { Button } from "@nextui-org/react";
 import { Bars3Icon } from "@heroicons/react/20/solid";
 
 // Componentes
-import Jokers from "../components/Jokers";
-import Notification from "../components/Notification";
-import GameMessage from "../components/GameMessage";
-import PlaceCards from "../components/PlaceCards";
-import MessageHeader from "../components/MessageHeader";
+import NotificationGeneral from "../components/NotificationGeneral";
+import NotificationGame from "../components/NotificationGame";
+import GamePlaceCards from "../components/GamePlaceCards";
+import GameHeader from "../components/GameHeader";
+import GameMenu from "../components/GameMenu";
 
 // Stores
 import { useCardStore } from "../stores/useCardStore";
@@ -73,7 +73,7 @@ export default function ViewGame() {
     } else if (goalScore <= 0) {
       useNotificationStore
         .getState()
-        .showModalWithMessage("Pasado al siguiente nivel");
+        .showModalWithMessage("Pasado el nivel!!");
       restarGameCards();
       nextGame();
       saveScore(0);
@@ -88,8 +88,8 @@ export default function ViewGame() {
 
   return (
     <div className="flex flex-col items-center h-screen text-white bg-custom-white gap-5 p-3">
-      <Notification />
-      <GameMessage isOpen={showModal} onClose={hideModal} message={message} />
+      <NotificationGeneral />
+      <NotificationGame isOpen={showModal} onClose={hideModal} message={message} />
 
       <div className="flex justify-around items-center w-full">
         
@@ -100,11 +100,11 @@ export default function ViewGame() {
           }}
         >
           <Bars3Icon className="h-10 w-10 text-custom-gray" />
-          <Jokers isOpen={showModalJokers} onClose={hideModalJoker} />
+          <GameMenu isOpen={showModalJokers} onClose={hideModalJoker} />
         </Button>
 
-        <MessageHeader title={"Valor"} score={handScore} />
-        <MessageHeader title={"Tipo"} score={handType} />
+        <GameHeader title={"Valor"} score={handScore} />
+        <GameHeader title={"Tipo"} score={handType} />
       </div>
 
       <div className="w-full text-danger font-bold text-xl text-center mt-5">
@@ -138,7 +138,7 @@ export default function ViewGame() {
           {playAvailable}
         </Button>
 
-        <PlaceCards />
+        <GamePlaceCards />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { PlayIcon, PauseIcon } from "@heroicons/react/20/solid";
 import {useMusicStore} from "../stores/useMusicStore"
 
-export default function MusicButton() {
+export default function ButtonMusic() {
    // Usamos el store para controlar la música
   const { isPlaying, toggleMusic } = useMusicStore((state) =>({
     isPlaying: state.isPlaying,

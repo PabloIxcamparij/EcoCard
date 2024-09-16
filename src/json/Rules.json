@@ -5,19 +5,19 @@
         "body": "2 cartas del mismo valor"
       },
       {
-        "title": "2 Par",
+        "title": "Doble Par",
         "body": "2 pares de cartas del mismo valor"
       },
       {
-        "title": "3 valores",
+        "title": "Trio de valores",
         "body": "El valor de las cartas es igual"
       },
       {
-        "title": "3 colores",
+        "title": "Trio de colores",
         "body": "Tres cartas del mismo color"
       },
       {
-        "title": "5 colores",
+        "title": "Quintento colores",
         "body": "Cinco cartas del mismo color"
       },
       {
@@ -25,7 +25,7 @@
         "body": "La carta de mayor valor seleccionada"
       },
       {
-        "title": "Full House",
+        "title": "Casa Llena",
         "body": "3 cartas del mismo valor y un par"
       }
     ]

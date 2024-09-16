@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import ButtonMusic from "../components/ButtonMusic";
 
 import {
   Modal,
@@ -11,14 +11,15 @@ import {
   Accordion,
 } from "@nextui-org/react";
 
-import { Rules } from "../json/Rules";
-import MusicButton from "./MusicButton";
 import { HomeIcon, ArrowPathIcon } from "@heroicons/react/20/solid";
+import { NavLink } from "react-router-dom";
+import { Rules } from "../json/Rules";
 
 import { useCardStore } from "../stores/useCardStore";
 import { useGameStore } from "../stores/useGameStore";
 import { useNotificationStore } from "../stores/useNotificationStore";
-export default function Jokers({ isOpen, onClose }) {
+
+export default function GameMenu({ isOpen, onClose }) {
   const { restarGameCards } = useCardStore((state) => ({
     restarGameCards: state.restarGameCards,
   }));
@@ -36,7 +37,6 @@ export default function Jokers({ isOpen, onClose }) {
       isOpen={isOpen}
       onOpenChange={onClose}
       placement="center"
-      className="w-5/6"
     >
       <ModalContent>
         <ModalHeader className="flex flex-col gap-1">
@@ -45,6 +45,7 @@ export default function Jokers({ isOpen, onClose }) {
 
         <ModalBody>
           <div className="text-center flex flex-wrap justify-center gap-6">
+            
             <NavLink to="/" className="w-3/12">
               <Button className="bg-custom-green-dark">
                 <HomeIcon className="h-8 text-white" />
@@ -63,7 +64,7 @@ export default function Jokers({ isOpen, onClose }) {
               <ArrowPathIcon className="h-8 text-white" />
             </Button>
 
-            <MusicButton />
+            <ButtonMusic />
           </div>
 
           <Accordion>

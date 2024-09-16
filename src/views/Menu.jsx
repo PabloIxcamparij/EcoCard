@@ -1,6 +1,5 @@
-import { NavLink } from "react-router-dom";
-import MusicButton from "../components/MusicButton";
-import MenuButton from "../components/MenuButton";
+import ButtonMusic from "../components/ButtonMusic";
+import ButtonMenu from "../components/ButtonMenu";
 
 export default function App() {
   return (
@@ -11,15 +10,15 @@ export default function App() {
 
       <div className="w-5/6 flex flex-col gap-8 mt-10">
 
-      <MenuButton route={"viewGame"} title={"Jugar"}/>
+      <ButtonMenu route={"viewGame"} title={"Jugar"}/>
 
-      <MenuButton route={"viewScore"} title={"Puntajes"}/>
+      <ButtonMenu route={"viewScore"} title={"Puntajes"}/>
 
-      <MenuButton route={"viewRules"} title={"Reglas"}/>
+      <ButtonMenu route={"viewRules"} title={"Reglas"}/>
 
-      <MenuButton route={"viewRules"} title={"Descargar material"}/>
+      <ButtonMenu route={"viewRules"} title={"Descargar material"}/>
 
-      <MusicButton />
+      <ButtonMusic />
       </div>
 
     </div>

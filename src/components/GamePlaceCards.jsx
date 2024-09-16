@@ -2,7 +2,7 @@ import React from "react";
 import { Howl } from "howler";
 import { useCardStore } from "../stores/useCardStore";
 
-export default function PlaceCards() {
+export default function GamePlaceCards() {
   const { handCards, selectedCards, toggleCardId } = useCardStore((state) => ({
     handCards: state.handCards,
     selectedCards: state.selectedCards,
