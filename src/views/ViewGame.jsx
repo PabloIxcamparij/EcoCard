@@ -18,7 +18,6 @@ import { useNotificationStore } from "../stores/useNotificationStore";
 
 export default function ViewGame() {
   const { selectedCards, restarGameCards } = useCardStore((state) => ({
-    selectRandomCards: state.selectRandomCards,
     restarGameCards: state.restarGameCards,
     selectedCards: state.selectedCards
   }));
@@ -70,7 +69,7 @@ export default function ViewGame() {
       useNotificationStore.getState().showModalWithMessage("Perdido");
       restarGameCards();
       restarGame();
-      saveScore(1);
+      // saveScore(1);
     } else if (goalScore <= 0) {
       useNotificationStore
         .getState()

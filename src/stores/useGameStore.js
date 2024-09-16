@@ -28,14 +28,12 @@ export const useGameStore = create(
       passPhase: false,
 
       // Función para descartar y obtener nuevas cartas aleatorias
+      // El type es para saber si es un descarte o es una jugada
       handleDiscardCards: (type) => {
-        // Obtener los datos desde el useCardStore
-        const { selectedCards, handCards, discardCards, changeCards } =
-          useCardStore.getState();
-
         const { discardAvailable } = get();
-
-        const { showNotification } = useNotificationStore.getState(); // Acceder al store de notificaciones
+        const { showNotification } = useNotificationStore.getState();
+        const { selectedCards, handCards, deckCards, changeCards } =
+        useCardStore.getState();
 
         if (selectedCards.length === 0) {
           showNotification({
@@ -55,16 +53,16 @@ export const useGameStore = create(
           (card) => !selectedCards.includes(card)
         );
 
-        const shuffledDiscardCards = [...discardCards].sort(
+        const shuffledDeckCards = [...deckCards].sort(
           () => 0.5 - Math.random()
         );
-        const newCards = shuffledDiscardCards.slice(0, selectedCards.length);
-        const updatedDiscardCards = discardCards.filter(
+        const newCards = shuffledDeckCards.slice(0, selectedCards.length);
+        const updatedDeckCards = deckCards.filter(
           (card) => !newCards.includes(card)
         );
 
         // Actualizar el estado con las nuevas cartas
-        changeCards(remainingHandCards, newCards, updatedDiscardCards);
+        changeCards(remainingHandCards, newCards, updatedDeckCards);
 
         if (type === 0) {
           set({
@@ -75,7 +73,6 @@ export const useGameStore = create(
 
       // Función para jugar las cartas seleccionadas
       handlePlayCards: (type) => {
-        
         const { selectedCards } = useCardStore.getState();
         const { showNotification } = useNotificationStore.getState();
         const { playAvailable, goalScore, finalScore } = get();
@@ -97,6 +94,7 @@ export const useGameStore = create(
         }
 
         let typeScore = 0;
+
         const sortedCards = [...selectedCards].sort(
           (a, b) => a.valor - b.valor
         );
@@ -218,7 +216,6 @@ export const useGameStore = create(
       },
 
       restarGame: () => {
-
         set({
           goalScore: 200,
           discardAvailable: 3,

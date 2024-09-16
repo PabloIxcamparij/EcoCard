@@ -8,7 +8,7 @@ export const useCardStore = create(
       cardsData: Cards,
       handCards: [],
       selectedCards: [],
-      discardCards: [],
+      deckCards: [],
 
       // Acción para agregar o eliminar una carta seleccionada
       toggleCardId: (cardId) =>
@@ -42,26 +42,25 @@ export const useCardStore = create(
 
         set({
           handCards: selected,
-
-          // Actualiza discardCards excluyendo las cartas en handCards
-          discardCards: Cards.filter((card) => !selected.includes(card)),
+          // Actualiza deckCards excluyendo las cartas en handCards
+          deckCards: Cards.filter((card) => !selected.includes(card)),
         });
       },
 
       // Función para cambiar las cartas en el estado
-      changeCards: (remainingHandCards, newCards, updatedDiscardCards) => {
+      changeCards: (remainingHandCards, newCards, updateddeckCards) => {
         set({
           handCards: [...remainingHandCards, ...newCards],
-          discardCards: updatedDiscardCards,
+          deckCards: updateddeckCards,
           selectedCards: [], // Resetear las cartas seleccionadas
         });
       },
-
+      
+      // Función para restablecer el j7ueg
       restarGameCards: () => {
-        
         set({
           handCards: [],
-          discardCards: [],
+          deckCards: [],
           selectedCards: []
         })
 

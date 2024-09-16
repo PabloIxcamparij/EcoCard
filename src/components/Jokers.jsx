@@ -15,7 +15,21 @@ import { Rules } from "../json/Rules";
 import MusicButton from "./MusicButton";
 import { HomeIcon, ArrowPathIcon } from "@heroicons/react/20/solid";
 
-export default function Jokers({isOpen, onClose}) {
+import { useCardStore } from "../stores/useCardStore";
+import { useGameStore } from "../stores/useGameStore";
+import { useNotificationStore } from "../stores/useNotificationStore";
+export default function Jokers({ isOpen, onClose }) {
+  const { restarGameCards } = useCardStore((state) => ({
+    restarGameCards: state.restarGameCards,
+  }));
+
+  const { restarGame } = useGameStore((state) => ({
+    restarGame: state.restarGame,
+  }));
+
+  const { hideModalJoker } = useNotificationStore((state) => ({
+    hideModalJoker: state.hideModalJoker,
+  }));
 
   return (
     <Modal
@@ -31,21 +45,25 @@ export default function Jokers({isOpen, onClose}) {
 
         <ModalBody>
           <div className="text-center flex flex-wrap justify-center gap-6">
-
             <NavLink to="/" className="w-3/12">
               <Button className="bg-custom-green-dark">
                 <HomeIcon className="h-8 text-white" />
               </Button>
             </NavLink>
 
-            <NavLink className="w-3/12">
-              <Button color="danger">
-                <ArrowPathIcon className="h-8 text-white" />
-              </Button>
-            </NavLink>
+            <Button
+              color="danger"
+              className="w-3/12"
+              onClick={() => {
+                restarGameCards()
+                restarGame()
+                hideModalJoker()
+              }}
+            >
+              <ArrowPathIcon className="h-8 text-white" />
+            </Button>
 
-            <MusicButton/>
-
+            <MusicButton />
           </div>
 
           <Accordion>
