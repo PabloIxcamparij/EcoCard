@@ -130,14 +130,14 @@ export const useGameStore = create(
 
           set({
             handScore: typeScore,
-            handType: "Trio valores",
+            handType: "Trio de valores",
           });
         } else if (new Set(colors).size === 1 && countValues.length === 3) {
           typeScore = totalScore * 5;
 
           set({
             handScore: typeScore,
-            handType: "Trio colores",
+            handType: "Trio de colores",
           });
         } else if (new Set(colors).size === 1 && selectedCards.length === 5) {
           // Verifica si todas las cartas tienen el mismo color para 5 colores
@@ -145,7 +145,7 @@ export const useGameStore = create(
 
           set({
             handScore: typeScore,
-            handType: "Quintento colores",
+            handType: "Quintento de colores",
           });
         } else if (countValues.includes(3) && countValues.includes(2)) {
           typeScore = totalScore * 7;
