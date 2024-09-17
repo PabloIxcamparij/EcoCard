@@ -1,4 +1,6 @@
 import React from "react";
+import { useNotificationStore } from "../stores/useNotificationStore";
+
 import {
   Modal,
   ModalContent,
@@ -9,12 +11,17 @@ import {
 
 import GameJokers from "./GameJokers";
 
-export default function GamePrizes({ isOpen, onClose }) {
+export default function GamePrizes() {
+  const { showModalJoker, hideModalGameJokers } = useNotificationStore((state) => ({
+    hideModalGameJokers: state.hideModalGameJokers,
+    showModalJoker: state.showModalJoker
+  }));
+
   return (
     <Modal
       className="w-4/5"
-      isOpen={isOpen}
-      onOpenChange={onClose}
+      isOpen={showModalJoker}
+      onOpenChange={hideModalGameJokers}
       placement="center"
     >
       <ModalContent>
@@ -29,6 +36,7 @@ export default function GamePrizes({ isOpen, onClose }) {
                 className="w-full text-xl font-semibold"
                 color="danger"
                 variant="ghost"
+                onClick={hideModalGameJokers}
               >
                 +Descarte
               </Button>
@@ -36,6 +44,7 @@ export default function GamePrizes({ isOpen, onClose }) {
                 className="w-full text-xl font-semibold"
                 color="success"
                 variant="ghost"
+                onClick={hideModalGameJokers}
               >
                 +Jugada
               </Button>

@@ -18,79 +18,49 @@ import { useGameStore } from "../stores/useGameStore";
 import { useNotificationStore } from "../stores/useNotificationStore";
 
 export default function ViewGame() {
-  const { selectedCards, restarGameCards } = useCardStore((state) => ({
-    restarGameCards: state.restarGameCards,
+  const { selectedCards } = useCardStore((state) => ({
     selectedCards: state.selectedCards,
   }));
 
   const {
-    handleDiscardCards,
-    handlePlayCards,
     discardAvailable,
     playAvailable,
     goalScore,
     handScore,
     handType,
-    nextGame,
-    saveScore,
-    restarGame,
+    nextLevel,
+    restartGame,
   } = useGameStore((state) => ({
-    handleDiscardCards: state.handleDiscardCards,
-    handlePlayCards: state.handlePlayCards,
     discardAvailable: state.discardAvailable,
     playAvailable: state.playAvailable,
     goalScore: state.goalScore,
     handScore: state.handScore,
     handType: state.handType,
-    saveScore: state.saveScore,
-    nextGame: state.nextGame,
-    restarGame: state.restarGame,
-  }));
-
-  const {
-    showModalNotification,
-    showModalMenu,
-    showModalJoker,
-    message,
-    hideModalGameNotification,
-    hideModalGameMenu,
-    hideModalGameJokers,
-  } = useNotificationStore((state) => ({
-    showModalJoker: state.showModalJoker,
-    hideModalGameJokers: state.hideModalGameJokers,
-
-    // Game Menu
-    showModalMenu: state.showModalMenu,
-    hideModalGameMenu: state.hideModalGameMenu,
-
-    // Notificacions
-    showModalNotification: state.showModalNotification,
-    hideModalGameNotification: state.hideModalGameNotification,
-    message: state.message,
+    nextLevel: state.nextLevel,
+    restartGame: state.restartGame,
   }));
 
   useEffect(() => {
-    restarGameCards();
-    restarGame();
+    restartGame();
   }, []);
 
   useEffect(() => {
-    handlePlayCards(1);
+    useGameStore.getState().handlePlayCards(1);
   }, [selectedCards]);
 
   useEffect(() => {
     if (playAvailable === 0 && goalScore > 0) {
-      useNotificationStore.getState().showModalGameNotification("Perdido");
-      restarGameCards();
-      restarGame();
-      // saveScore(1);
+      useNotificationStore
+        .getState()
+        .showModalGameNotification("Perdido");
+      restartGame();
+      // useGameStore.getState().saveScorec(1);
     } else if (goalScore <= 0) {
       useNotificationStore
         .getState()
-        .showModalGameNotification("Pasado el nivel!!");
-      restarGameCards();
-      nextGame();
-      saveScore(0);
+        .showModalGameNotification("Pasado de nivel!!");
+      nextLevel();
+      // useGameStore.getState().saveScorec(0);
     }
   }, [playAvailable]);
 
@@ -103,12 +73,8 @@ export default function ViewGame() {
   return (
     <div className="flex flex-col items-center h-screen text-white bg-custom-white gap-5 p-3">
       <NotificationGeneral />
-      <NotificationGame
-        isOpen={showModalNotification}
-        onClose={hideModalGameNotification}
-        message={message}
-      />
-      <GamePrizes isOpen={showModalJoker} onClose={hideModalGameJokers} />
+      <NotificationGame />
+      <GamePrizes />
 
       <div className="flex justify-around items-center w-full">
         <Button
@@ -118,7 +84,7 @@ export default function ViewGame() {
           }}
         >
           <Bars3Icon className="h-10 w-10 text-custom-gray" />
-          <GameMenu isOpen={showModalMenu} onClose={hideModalGameMenu} />
+          <GameMenu />
         </Button>
 
         <GameHeader title={"Valor"} score={handScore} />
@@ -137,7 +103,7 @@ export default function ViewGame() {
           color="danger"
           variant="ghost"
           onClick={() => {
-            handleDiscardCards(0);
+            useGameStore.getState().handleDiscardCards(0);
             activationSound.play();
           }}
         >
@@ -149,7 +115,7 @@ export default function ViewGame() {
           color="success"
           variant="ghost"
           onClick={() => {
-            handlePlayCards(0);
+            useGameStore.getState().handlePlayCards(0);
             activationSound.play();
           }}
         >

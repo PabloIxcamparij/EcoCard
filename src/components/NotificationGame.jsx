@@ -1,10 +1,17 @@
 import React from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody } from "@nextui-org/react";
+import { useNotificationStore } from "../stores/useNotificationStore";
 
-export default function NotificationGame({ isOpen, onClose, message }) {
+export default function NotificationGame() {
+
+  const { message,showModalNotification, hideModalGameNotification } = useNotificationStore((state) => ({
+    message: state.message,
+    showModalNotification: state.showModalNotification,
+    hideModalGameNotification: state.hideModalGameNotification
+  }));
 
   return (
-    <Modal className="w-4/5" isOpen={isOpen} onOpenChange={onClose} placement="center">
+    <Modal className="w-4/5" isOpen={showModalNotification} onOpenChange={hideModalGameNotification} placement="center">
 
       <ModalContent>
 

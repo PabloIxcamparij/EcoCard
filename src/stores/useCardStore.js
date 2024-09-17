@@ -56,7 +56,7 @@ export const useCardStore = create(
       },
       
       // Función para restablecer el j7ueg
-      restarGameCards: () => {
+      restartGameCards: () => {
         set({
           handCards: [],
           deckCards: [],

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "@nextui-org/react";
 import { useJokerStore } from "../stores/useJokerStore";
+import { useNotificationStore } from "../stores/useNotificationStore";
+
 
 export default function GameJokers() {
   const [selectedJoker, setSelectedJoker] = useState(false);
@@ -8,6 +10,10 @@ export default function GameJokers() {
   const { selectRandomCards, selecJoker } = useJokerStore((state) => ({
     selectRandomCards: state.selectRandomCards,
     selecJoker: state.selecJoker,
+  }));
+
+  const {hideModalGameJokers } = useNotificationStore((state) => ({
+    hideModalGameJokers: state.hideModalGameJokers
   }));
 
   return (
@@ -18,7 +24,8 @@ export default function GameJokers() {
         onClick={() => {
           if (selectedJoker === false) {
             selectRandomCards();
-            setSelectedJoker(true);
+            setSelectedJoker(true)
+            hideModalGameJokers()
           }
         }}
       >

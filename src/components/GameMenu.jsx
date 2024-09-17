@@ -15,28 +15,29 @@ import { HomeIcon, ArrowPathIcon } from "@heroicons/react/20/solid";
 import { NavLink } from "react-router-dom";
 import { Rules } from "../json/Rules";
 
-import { useCardStore } from "../stores/useCardStore";
+import { useJokerStore } from "../stores/useJokerStore";
 import { useGameStore } from "../stores/useGameStore";
 import { useNotificationStore } from "../stores/useNotificationStore";
 
-export default function GameMenu({ isOpen, onClose }) {
-  const { restarGameCards } = useCardStore((state) => ({
-    restarGameCards: state.restarGameCards,
+export default function GameMenu() {
+  const { restartGame } = useGameStore((state) => ({
+    restartGame: state.restartGame,
   }));
 
-  const { restarGame } = useGameStore((state) => ({
-    restarGame: state.restarGame,
+  const { restartJokers } = useJokerStore((state) => ({
+    restartJokers: state.restartJokers,
   }));
 
-  const { hideModalGameMenu } = useNotificationStore((state) => ({
+  const { showModalMenu, hideModalGameMenu } = useNotificationStore((state) => ({
     hideModalGameMenu: state.hideModalGameMenu,
+    showModalMenu: state.showModalMenu
   }));
 
   return (
     <Modal
       className="w-4/5"
-      isOpen={isOpen}
-      onOpenChange={onClose}
+      isOpen={showModalMenu}
+      onOpenChange={hideModalGameMenu}
       placement="center"
     >
       <ModalContent>
@@ -54,9 +55,9 @@ export default function GameMenu({ isOpen, onClose }) {
               color="danger"
               className="w-3/12"
               onClick={() => {
-                restarGameCards();
-                restarGame();
-                hideModalGameMenu();
+                restartGame()
+                restartJokers()
+                hideModalGameMenu()
               }}
             >
               <ArrowPathIcon className="h-8 text-white" />

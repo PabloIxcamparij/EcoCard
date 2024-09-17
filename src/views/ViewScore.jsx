@@ -19,7 +19,7 @@ export default function ViewScore() {
   }, []);
 
   return (
-    <div className=" bg-custom-white p-5">
+    <div className=" w-full bg-custom-white p-5">
       <NavLink to="/" className="w-3/5">
       <Button className="bg-transparent">
           <HomeIcon className="h-10 w-10 text-custom-green-dark" />

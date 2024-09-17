@@ -209,8 +209,10 @@ export const useGameStore = create(
       },
 
       // Hace que se resetee varios elementos y cambiar la puntuacion objetivo
-      nextGame: () =>{
+      nextLevel: () =>{
         const { nevelsGoal, currentLevel } = get();
+        const { restartGameCards } = useCardStore.getState();
+        restartGameCards()
 
         set({
           goalScore: nevelsGoal[currentLevel],
@@ -226,7 +228,11 @@ export const useGameStore = create(
       },
 
       // Resetea el juego a sus valores origniales
-      restarGame: () => {
+      restartGame: () => {
+
+        const { restartGameCards } = useCardStore.getState();
+        restartGameCards()
+
         set({
           goalScore: 200,
           discardAvailable: 3,
