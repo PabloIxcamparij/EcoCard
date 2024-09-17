@@ -1,6 +1,6 @@
 import React from "react";
 import ButtonMusic from "../components/ButtonMusic";
-
+import GameHandJokers from "../components/GameHandJokers";
 import {
   Modal,
   ModalContent,
@@ -24,56 +24,65 @@ export default function GameMenu() {
     restartGame: state.restartGame,
   }));
 
-  const { restartJokers } = useJokerStore((state) => ({
-    restartJokers: state.restartJokers,
+  const { handJokers } = useJokerStore((state) => ({
+    handJokers: state.handJokers,
   }));
 
-  const { showModalMenu, hideModalGameMenu } = useNotificationStore((state) => ({
-    hideModalGameMenu: state.hideModalGameMenu,
-    showModalMenu: state.showModalMenu
-  }));
+  const { showModalMenu, hideModalGameMenu } = useNotificationStore(
+    (state) => ({
+      hideModalGameMenu: state.hideModalGameMenu,
+      showModalMenu: state.showModalMenu,
+    })
+  );
 
   return (
     <Modal
-      className="w-4/5"
       isOpen={showModalMenu}
       onOpenChange={hideModalGameMenu}
+      className="w-4/5"
+      scrollBehavior="inside"
       placement="center"
     >
       <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">Menu</ModalHeader>
+        <ModalHeader>Menu</ModalHeader>
 
         <ModalBody>
-          <div className="text-center flex flex-wrap justify-center gap-6">
-            <NavLink to="/" className="w-3/12">
-              <Button className="bg-custom-green-dark">
-                <HomeIcon className="h-8 text-white" />
-              </Button>
-            </NavLink>
+          <div className="text-center flex flex-wrap justify-center">
+            <div className="flex justify-between w-full gap-2">
+              <NavLink to="/" className="w-3/12">
+                <Button className="bg-custom-green-dark">
+                  <HomeIcon className="h-8 text-white" />
+                </Button>
+              </NavLink>
 
-            <Button
-              color="danger"
-              className="w-3/12"
-              onClick={() => {
-                restartGame()
-                restartJokers()
-                hideModalGameMenu()
-              }}
-            >
-              <ArrowPathIcon className="h-8 text-white" />
-            </Button>
+              <Button
+                color="danger"
+                className="w-3/12"
+                onClick={() => {
+                  restartGame();
+                  hideModalGameMenu();
+                }}
+              >
+                <ArrowPathIcon className="h-8 text-white" />
+              </Button>
+            </div>
 
             <ButtonMusic />
           </div>
 
           <Accordion>
             <AccordionItem key="1" aria-label="Comodines" title="Comodines">
-              Comodines
+              <div className="flex flex-wrap gap-2 w-full">
+                {handJokers.map((Joker, index) => (
+                  <GameHandJokers key={index} Joker={Joker} />
+                ))}
+              </div>
             </AccordionItem>
+
             <AccordionItem key="2" aria-label="Manos" title="Manos">
               <div className="flex flex-col gap-3">
                 <h1 className="font-bold text-center text-custom-green-dark">
-                  Juegos de manos reconocibles
+                  Juegos de manos permitidos
                 </h1>
 
                 {Rules.map((rule, index) => (

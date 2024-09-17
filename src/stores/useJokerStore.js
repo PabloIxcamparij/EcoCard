@@ -11,12 +11,10 @@ export const useJokerStore = create(
 
       // Función para seleccionar un comodín aleatorio
       selectRandomCards: () => {
-        const { handJokers, deckJokers } = get();
+        const {deckJokers } = get();
 
         const randomIndex = Math.floor(Math.random() * deckJokers.length);
         const randomJoker = deckJokers[randomIndex];
-
-        handJokers.push(randomJoker);
 
         const updatedDeckJokers = deckJokers.filter(
           (_, index) => index !== randomIndex
@@ -24,9 +22,16 @@ export const useJokerStore = create(
 
         set({
           selecJoker: randomJoker,
-          handJokers: [...handJokers],
           deckJokers: updatedDeckJokers,
         });
+      },
+
+      selectJoker: () => {
+        const { selecJoker, handJokers } = get();
+
+        set({
+          handJokers: [...handJokers, selecJoker]
+        })
       },
 
       restartJokers: () => {

@@ -56,9 +56,6 @@ export default function ViewGame() {
       restartGame();
       // useGameStore.getState().saveScorec(1);
     } else if (goalScore <= 0) {
-      useNotificationStore
-        .getState()
-        .showModalGameNotification("Pasado de nivel!!");
       nextLevel();
       // useGameStore.getState().saveScorec(0);
     }
@@ -71,12 +68,12 @@ export default function ViewGame() {
   });
 
   return (
-    <div className="flex flex-col items-center h-screen text-white bg-custom-white gap-5 p-3">
+    <div className="flex flex-col items-center h-full text-white bg-custom-white gap-1 p-2">
       <NotificationGeneral />
       <NotificationGame />
       <GamePrizes />
 
-      <div className="flex justify-around items-center w-full">
+      <div className="flex justify-around items-center w-full h-20">
         <Button
           className="bg-transparent"
           onClick={() => {

@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@nextui-org/react";
 import { useJokerStore } from "../stores/useJokerStore";
 import { useNotificationStore } from "../stores/useNotificationStore";
 
 
 export default function GameJokers() {
-  const [selectedJoker, setSelectedJoker] = useState(false);
 
-  const { selectRandomCards, selecJoker } = useJokerStore((state) => ({
+  const [selectCard, setSelectCard] =  useState(false)
+
+  const { selectRandomCards, selecJoker, selectJoker } = useJokerStore((state) => ({
     selectRandomCards: state.selectRandomCards,
+    selectJoker: state.selectJoker,
     selecJoker: state.selecJoker,
   }));
 
@@ -16,15 +18,19 @@ export default function GameJokers() {
     hideModalGameJokers: state.hideModalGameJokers
   }));
 
+  useEffect(() => {
+    selectRandomCards();
+  }, [selectJoker]);
+
   return (
     <div className="flex flex-col items-center justify-center">
       <Button
         className="w-full h-60"
         style={{ backgroundColor: selecJoker?.color || "#ddd" }}
         onClick={() => {
-          if (selectedJoker === false) {
-            selectRandomCards();
-            setSelectedJoker(true)
+          if (selectCard === false) {
+            selectJoker()
+            setSelectCard(true)
             hideModalGameJokers()
           }
         }}

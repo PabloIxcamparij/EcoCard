@@ -18,7 +18,7 @@ export const useGameStore = create(
         500, 700, 800,
         1000, 1050, 1200,
         1400, 1500, 1600,
-        1650, 1800
+        1650, 1800, 2000
       ], //All nevels of the game
       currentLevel: 0, //Current position in the game
       goalScore: 200, //First level is 200
@@ -148,7 +148,7 @@ export const useGameStore = create(
 
           set({
             handScore: typeScore,
-            handType: "Quintento de colores",
+            handType: "Cinco colores",
           });
         } else if (countValues.includes(3) && countValues.includes(2)) {
           typeScore = totalScore * 7;
@@ -221,7 +221,7 @@ export const useGameStore = create(
           currentLevel: currentLevel + 1,
         })
 
-        if ([0, 4, 7, 10].includes(currentLevel)) {
+        if ([1, 4, 7, 9, 10].includes(currentLevel)) {
           const { showModalGameJokers } = useNotificationStore.getState();
           showModalGameJokers()
         }
@@ -232,6 +232,9 @@ export const useGameStore = create(
 
         const { restartGameCards } = useCardStore.getState();
         restartGameCards()
+
+        const { restartJokers } = useJokerStore.getState();
+        restartJokers()
 
         set({
           goalScore: 200,
