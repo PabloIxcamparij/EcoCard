@@ -12,13 +12,12 @@ export const useNotificationStore = create(
       },
 
       // Estado del modal
-      showModal: false,
+      showModalMenu: false,
+      showModalJoker: false,
+      showModalNotification: false,
       message: "",
 
-      // Estado del modal Jokers
-      showModalJokers: false,
-
-      // Función para mostrar notificación
+      // Función para mostrar NotificationGeneral
       showNotification: (payload) => {
         set({
           notificacion: {
@@ -32,7 +31,7 @@ export const useNotificationStore = create(
         }, 3000);
       },
 
-      // Función para ocultar notificación
+      // Función para ocultar NotificationGeneral
       hideNotification: () => {
         set({
           notificacion: {
@@ -41,38 +40,54 @@ export const useNotificationStore = create(
         });
       },
 
-      // Función para mostrar el modal
-      showModalWithMessage: (message) => {
+      // Función para mostrar el modal NotificationGame
+      showModalGameNotification: (message) => {
         set({
-          showModal: true,
+          showModalNotification: true,
           message,
         });
 
         setTimeout(() => {
-          get().hideModal();
+          get().hideModalGameNotification();
         }, 1500);
       },
 
-      showModalJoker: () => {
+      // Función para ocultar el modal NotificationGame
+      hideModalGameNotification: () => {
         set({
-          showModalJokers: true,
-        });
-      },
-
-      // Función para ocultar el modal
-      hideModal: () => {
-        set({
-          showModal: false,
+          showModalNotification: false,
           message: "",
         });
       },
 
-      // Función para ocultar el modal Joker
-      hideModalJoker: () => {
+      // Función para mostrar el modal GameMenu
+      showModalGameMenu: () => {
         set({
-          showModalJokers: false,
+          showModalMenu: true,
         });
       },
+
+      // Función para ocultar el modal GameMenu
+      hideModalGameMenu: () => {
+        set({
+          showModalMenu: false,
+        });
+      },
+      
+      // Función para mostrar el modal GameJokers
+      showModalGameJokers: () =>{
+        set({
+          showModalJoker: true,
+        });
+      },
+
+      // Función para ocultar el modal GameJokers
+      hideModalGameJokers: () =>{
+        set({
+          showModalJoker: false,
+        });
+      }
+
     }),
     { name: "NotificationStore" }
   )

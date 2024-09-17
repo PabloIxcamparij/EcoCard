@@ -34,18 +34,16 @@ export default function GameMenu({ isOpen, onClose }) {
 
   return (
     <Modal
+      className="w-4/5"
       isOpen={isOpen}
       onOpenChange={onClose}
       placement="center"
     >
       <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">
-          Comodines / Reglas
-        </ModalHeader>
+        <ModalHeader className="flex flex-col gap-1">Menu</ModalHeader>
 
         <ModalBody>
           <div className="text-center flex flex-wrap justify-center gap-6">
-            
             <NavLink to="/" className="w-3/12">
               <Button className="bg-custom-green-dark">
                 <HomeIcon className="h-8 text-white" />
@@ -56,9 +54,9 @@ export default function GameMenu({ isOpen, onClose }) {
               color="danger"
               className="w-3/12"
               onClick={() => {
-                restarGameCards()
-                restarGame()
-                hideModalJoker()
+                restarGameCards();
+                restarGame();
+                hideModalJoker();
               }}
             >
               <ArrowPathIcon className="h-8 text-white" />

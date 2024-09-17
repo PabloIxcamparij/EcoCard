@@ -1,0 +1,68 @@
+{
+  "Jokers": [
+    {
+      "id": 1,
+      "title": "Manejo adecuado",
+      "color": "#e46c0a",
+      "description": "Sabes que no se recicla el vidrio plano y lo has separado; suma 50 puntos si juegas con dos cartas de vidrio.",
+      "bonusType": "twoSameType",
+      "type": "vidrio"
+    },
+    {
+      "id": 2,
+      "title": "Separación correcta",
+      "color": "#e46c0a",
+      "description": "Haces uso de bolsas que soportan la tensión ejercida por el vidrio; suma 100 puntos si juegas solo con cartas de vidrio.",
+      "bonusType": "allSameType",
+      "type": "vidrio"
+    },
+    {
+      "id": 3,
+      "title": "El color correcto",
+      "color": "#a4a3a3",
+      "description": "Usas bolsas transparentes para el papel; suma 50 puntos al puntaje si juegas con dos cartas de papel y cartón.",
+      "bonusType": "twoSameType",
+      "type": "papel y cartón"
+    },
+    {
+      "id": 4,
+      "title": "Solo seco",
+      "color": "#a4a3a3",
+      "description": "Sabes que no se puede reciclar papel/cartón mojado; suma 100 puntos al puntaje si juegas solo con cartas de papel/cartón.",
+      "bonusType": "allSameType",
+      "type": "papel y cartón"
+    },
+    {
+      "id": 5,
+      "title": "Se acepta tetrapak",
+      "color": "#0085cb",
+      "description": "Sabes que el tetrapak entra en la categoría de envases; suma 50 puntos al puntaje si juegas con dos cartas de envases.",
+      "bonusType": "twoSameType",
+      "type": "envases"
+    },
+    {
+      "id": 6,
+      "title": "Problema con el aceite",
+      "color": "#0085cb",
+      "description": "Sabes que los plásticos de aceite son de manejo especial; suma 100 puntos al puntaje si juegas solo con cartas de envases.",
+      "bonusType": "allSameType",
+      "type": "envases"
+    },
+    {
+      "id": 7,
+      "title": "No se acepta papel",
+      "color": "#ffed00",
+      "description": "Sabes que el papel aluminio no entra en la categoría de aluminio; suma 50 puntos al puntaje si juegas con dos cartas de aluminio.",
+      "bonusType": "twoSameType",
+      "type": "aluminio"
+    },
+    {
+      "id": 8,
+      "title": "Todo limpio",
+      "color": "#ffed00",
+      "description": "Haces una limpieza previa en todas las latas; suma 100 puntos al puntaje si juegas solo con cartas de aluminio.",
+      "bonusType": "allSameType",
+      "type": "aluminio"
+    }
+  ]
+}
