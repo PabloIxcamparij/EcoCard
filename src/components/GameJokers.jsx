@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "@nextui-org/react";
-import { Jokers } from "../json/Jokers.json";
+import { useJokerStore } from "../stores/useJokerStore";
 
 export default function GameJokers() {
-  const [selectedJoker, setSelectedJoker] = useState(null);
+  const [selectedJoker, setSelectedJoker] = useState(false);
 
-  // Función para seleccionar un joker de forma aleatoria
-  const selectRandomJoker = () => {
-    const randomIndex = Math.floor(Math.random() * Jokers.length);
-    const randomJoker = Jokers[randomIndex];
-    setSelectedJoker(randomJoker);
-  };
-
-  // Seleccionar un joker al cargar el componente
-  useEffect(() => {
-    selectRandomJoker();
-  }, []);
+  const { selectRandomCards, selecJoker } = useJokerStore((state) => ({
+    selectRandomCards: state.selectRandomCards,
+    selecJoker: state.selecJoker,
+  }));
 
   return (
     <div className="flex flex-col items-center justify-center">
       <Button
         className="w-full h-60"
-        style={{ backgroundColor: selectedJoker?.color }}
-        onClick={selectRandomJoker} // Cambia el joker cuando el botón se hace clic
+        style={{ backgroundColor: selecJoker?.color || "#ddd" }}
+        onClick={() => {
+          if (selectedJoker === false) {
+            selectRandomCards();
+            setSelectedJoker(true);
+          }
+        }}
       >
         {/* Mostrar detalles del joker seleccionado */}
         <div className="text-black text-center text-wrap">
-          <h1 className="text-xl font-bold">{selectedJoker?.title}</h1>
-          <p className="text-lg">{selectedJoker?.description}</p>
+          <h1 className="text-xl font-bold">{selecJoker?.title || "Jokers"}</h1>
+          <p className="text-lg">
+            {selecJoker?.description || "Selecciona un joker"}
+          </p>
         </div>
       </Button>
     </div>

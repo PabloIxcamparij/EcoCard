@@ -28,8 +28,8 @@ export default function GameMenu({ isOpen, onClose }) {
     restarGame: state.restarGame,
   }));
 
-  const { hideModalJoker } = useNotificationStore((state) => ({
-    hideModalJoker: state.hideModalJoker,
+  const { hideModalGameMenu } = useNotificationStore((state) => ({
+    hideModalGameMenu: state.hideModalGameMenu,
   }));
 
   return (
@@ -56,7 +56,7 @@ export default function GameMenu({ isOpen, onClose }) {
               onClick={() => {
                 restarGameCards();
                 restarGame();
-                hideModalJoker();
+                hideModalGameMenu();
               }}
             >
               <ArrowPathIcon className="h-8 text-white" />

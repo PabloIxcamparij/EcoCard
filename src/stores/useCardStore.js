@@ -1,11 +1,10 @@
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
 import { Cards } from "../json/Card.json";
+import { devtools } from "zustand/middleware";
 
 export const useCardStore = create(
   devtools(
     (set, get) => ({
-      cardsData: Cards,
       handCards: [],
       selectedCards: [],
       deckCards: [],

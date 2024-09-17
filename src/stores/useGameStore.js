@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { useCardStore } from "./useCardStore"; // Importar el useCardStore para acceder a los datos
 import { useNotificationStore } from "./useNotificationStore"; // Para acceder al store de notificaciones
+import { useJokerStore } from "./useJokerStore";
 
 const calculateTotalScore = (cards) => {
   return cards.reduce((sum, card) => sum + card.puntaje, 0);
@@ -13,9 +14,11 @@ export const useGameStore = create(
       playAvailable: 3,
       discardAvailable: 3,
       nevelsGoal:[
-        300, 350, 500, 700,
-        800, 1000, 1050, 1200, 1400,
-        1500, 1600, 1650, 1800, 2000
+        300, 350,
+        500, 700, 800,
+        1000, 1050, 1200,
+        1400, 1500, 1600,
+        1650, 1800
       ], //All nevels of the game
       currentLevel: 0, //Current position in the game
       goalScore: 200, //First level is 200
@@ -215,6 +218,11 @@ export const useGameStore = create(
           playAvailable: 3,
           currentLevel: currentLevel + 1,
         })
+
+        if ([0, 4, 7, 10].includes(currentLevel)) {
+          const { showModalGameJokers } = useNotificationStore.getState();
+          showModalGameJokers()
+        }
       },
 
       // Resetea el juego a sus valores origniales

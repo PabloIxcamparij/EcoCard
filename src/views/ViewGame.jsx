@@ -20,7 +20,7 @@ import { useNotificationStore } from "../stores/useNotificationStore";
 export default function ViewGame() {
   const { selectedCards, restarGameCards } = useCardStore((state) => ({
     restarGameCards: state.restarGameCards,
-    selectedCards: state.selectedCards
+    selectedCards: state.selectedCards,
   }));
 
   const {
@@ -47,16 +47,27 @@ export default function ViewGame() {
     restarGame: state.restarGame,
   }));
 
-  const { showModalNotification, showModalMenu, showModalJoker, message, hideModalGameNotification, hideModalGameJokers, hideModalMenu } =
-    useNotificationStore((state) => ({
-      showModalJoker: state.showModalJoker,
-      hideModalGameJokers: state.hideModalGameJokers,
-      showModalMenu: state.showModalMenu,
-      hideModalMenu: state.hideModalMenu,
-      showModalNotification: state.showModalNotification,
-      hideModalGameNotification: state.hideModalGameNotification,
-      message: state.message,
-    }));
+  const {
+    showModalNotification,
+    showModalMenu,
+    showModalJoker,
+    message,
+    hideModalGameNotification,
+    hideModalGameMenu,
+    hideModalGameJokers,
+  } = useNotificationStore((state) => ({
+    showModalJoker: state.showModalJoker,
+    hideModalGameJokers: state.hideModalGameJokers,
+
+    // Game Menu
+    showModalMenu: state.showModalMenu,
+    hideModalGameMenu: state.hideModalGameMenu,
+
+    // Notificacions
+    showModalNotification: state.showModalNotification,
+    hideModalGameNotification: state.hideModalGameNotification,
+    message: state.message,
+  }));
 
   useEffect(() => {
     restarGameCards();
@@ -69,9 +80,7 @@ export default function ViewGame() {
 
   useEffect(() => {
     if (playAvailable === 0 && goalScore > 0) {
-      useNotificationStore.
-      getState().
-      showModalGameNotification("Perdido");
+      useNotificationStore.getState().showModalGameNotification("Perdido");
       restarGameCards();
       restarGame();
       // saveScore(1);
@@ -94,11 +103,14 @@ export default function ViewGame() {
   return (
     <div className="flex flex-col items-center h-screen text-white bg-custom-white gap-5 p-3">
       <NotificationGeneral />
-      <NotificationGame isOpen={showModalNotification} onClose={hideModalGameNotification} message={message} />
+      <NotificationGame
+        isOpen={showModalNotification}
+        onClose={hideModalGameNotification}
+        message={message}
+      />
       <GamePrizes isOpen={showModalJoker} onClose={hideModalGameJokers} />
 
       <div className="flex justify-around items-center w-full">
-        
         <Button
           className="bg-transparent"
           onClick={() => {
@@ -106,16 +118,7 @@ export default function ViewGame() {
           }}
         >
           <Bars3Icon className="h-10 w-10 text-custom-gray" />
-          <GameMenu isOpen={showModalMenu} onClose={hideModalMenu} />
-        </Button>
-
-        <Button
-         className="bg-transparent"
-         onClick={() => {
-           useNotificationStore.getState().showModalGameJokers();
-         }}
-        >
-          Aa
+          <GameMenu isOpen={showModalMenu} onClose={hideModalGameMenu} />
         </Button>
 
         <GameHeader title={"Valor"} score={handScore} />
