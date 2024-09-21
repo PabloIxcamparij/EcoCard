@@ -54,10 +54,11 @@ export default function ViewGame() {
         .getState()
         .showModalGameNotification("Perdido");
       restartGame();
-      // useGameStore.getState().saveScorec(1);
+
+      useGameStore.getState().saveScore(1);
     } else if (goalScore <= 0) {
       nextLevel();
-      // useGameStore.getState().saveScorec(0);
+      useGameStore.getState().saveScore(0);
     }
   }, [playAvailable]);
 
@@ -68,8 +69,8 @@ export default function ViewGame() {
   });
 
   return (
-    <div className="flex flex-col items-center h-full text-white bg-custom-white gap-1 p-2">
-      <NotificationGeneral />
+<div className="flex flex-col min-h-screen items-center text-white bg-custom-white p-4">
+<NotificationGeneral />
       <NotificationGame />
       <GamePrizes />
 
@@ -119,7 +120,7 @@ export default function ViewGame() {
           {playAvailable}
         </Button>
 
-        <GamePlaceCards />
+        <GamePlaceCards className="" />
       </div>
     </div>
   );

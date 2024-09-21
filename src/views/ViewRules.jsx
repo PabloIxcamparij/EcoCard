@@ -6,8 +6,8 @@ import { HomeIcon } from "@heroicons/react/20/solid";
 
 export default function ViewRules() {
   return (
-    <div className="bg-custom-white p-4 ">
-      <NavLink to="/" className="w-3/5">
+    <div className="min-h-screen bg-custom-white p-5">
+      <NavLink to="/" className="w-3/5 -m-4">
         <Button className="bg-transparent">
           <HomeIcon className="h-10 w-10 text-custom-green-dark" />
         </Button>
