@@ -54,11 +54,9 @@ export default function ViewGame() {
         .getState()
         .showModalGameNotification("Perdido");
       restartGame();
-
       useGameStore.getState().saveScore(1);
     } else if (goalScore <= 0) {
       nextLevel();
-      useGameStore.getState().saveScore(0);
     }
   }, [playAvailable]);
 
@@ -74,7 +72,7 @@ export default function ViewGame() {
       <NotificationGame />
       <GamePrizes />
 
-      <div className="flex justify-around items-center w-full h-20">
+      <div className="flex justify-around items-center w-full h-12">
         <Button
           className="bg-transparent"
           onClick={() => {
@@ -89,13 +87,13 @@ export default function ViewGame() {
         <GameHeader title={"Tipo"} score={handType} />
       </div>
 
-      <div className="w-full text-danger font-bold text-xl text-center mt-5">
+      <div className="w-full text-danger font-bold text-lg text-center mt-4">
         <h1>
           {"Objetivo:"} {goalScore}
         </h1>
       </div>
 
-      <div className="flex flex-wrap justify-around items-center w-full gap-6 mt-5 mb-5">
+      <div className="flex flex-wrap justify-around items-center w-full gap-6 mt-5 mb-2">
         <Button
           className="rounded-full w-2/5 font-bold text-xl"
           color="danger"

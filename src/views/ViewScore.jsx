@@ -40,7 +40,7 @@ export default function ViewScore() {
         </h1>
 
         <div className="flex justify-center items-center w-4/5 h-12 bg-custom-green rounded-3xl mt-5 mb-5">
-          <h1 className="text-xl font-bold text-white">Ganadas</h1>
+          <h1 className="text-xl font-bold text-white">Partidas Ganadas</h1>
         </div>
 
         <Table isStriped aria-label="Example static collection table">
@@ -63,7 +63,7 @@ export default function ViewScore() {
         </Table>
 
         <div className="flex justify-center items-center w-4/5 h-12 bg-custom-red rounded-3xl mt-5 mb-5">
-          <h1 className="text-xl font-bold text-white">Perdidas</h1>
+          <h1 className="text-xl font-bold text-white"> Partidas Perdidas</h1>
         </div>
 
         <Table isStriped aria-label="Example static collection table">

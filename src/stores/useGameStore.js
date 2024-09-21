@@ -13,12 +13,9 @@ export const useGameStore = create(
     (set, get) => ({
       playAvailable: 3,
       discardAvailable: 3,
-      nevelsGoal:[
-        300, 350,
-        500, 700, 800,
-        1000, 1050, 1200,
-        1400, 1500, 1600,
-        1650, 1800, 2000
+      nevelsGoal: [
+        300, 350, 500, 700, 800, 1000, 1050, 1200, 1400, 1500, 1600, 1650, 1800,
+        2000,
       ], //All nevels of the game
       currentLevel: 0, //Current position in the game
       goalScore: 200, //First level is 200
@@ -36,7 +33,7 @@ export const useGameStore = create(
         const { discardAvailable } = get();
         const { showNotification } = useNotificationStore.getState();
         const { selectedCards, handCards, deckCards, changeCards } =
-        useCardStore.getState();
+          useCardStore.getState();
 
         if (selectedCards.length === 0) {
           showNotification({
@@ -78,7 +75,8 @@ export const useGameStore = create(
       handlePlayCards: (type) => {
         const { selectedCards } = useCardStore.getState();
         const { showNotification } = useNotificationStore.getState();
-        const { playAvailable, goalScore, finalScore } = get();
+        const { playAvailable, goalScore, finalScore, handScore, setHand } =
+          get();
 
         if (selectedCards.length === 0) {
           if (type === 0) {
@@ -88,11 +86,7 @@ export const useGameStore = create(
             });
           }
 
-          set({
-            handScore: 0,
-            handType: "---",
-          });
-
+          setHand(0, "---")
           return;
         }
 
@@ -105,6 +99,7 @@ export const useGameStore = create(
         const values = sortedCards.map((card) => card.valor);
         const colors = sortedCards.map((card) => card.color);
         const counts = {};
+
         values.forEach((value) => {
           counts[value] = (counts[value] || 0) + 1;
         });
@@ -117,69 +112,102 @@ export const useGameStore = create(
         if (countValues.includes(2) && countValues.length === 1) {
           typeScore = totalScore * 3;
 
-          set({
-            handScore: typeScore,
-            handType: "Par",
-          });
+          setHand(typeScore, "Par");
         } else if (countValues.filter((count) => count === 2).length === 2) {
           typeScore = totalScore * 4;
 
-          set({
-            handScore: typeScore,
-            handType: "Doble Par",
-          });
+          setHand(typeScore, "Doble Par");
         } else if (countValues.includes(3) && countValues.length === 1) {
           typeScore = totalScore * 5;
 
-          set({
-            handScore: typeScore,
-            handType: "Trio de valores",
-          });
+          setHand(typeScore, "Trio de valores");
         } else if (new Set(colors).size === 1 && countValues.length === 3) {
           typeScore = totalScore * 5;
 
-          set({
-            handScore: typeScore,
-            handType: "Trio de colores",
-          });
+          setHand(typeScore, "Trio de colores");
         } else if (new Set(colors).size === 1 && selectedCards.length === 5) {
-          // Verifica si todas las cartas tienen el mismo color para 5 colores
           typeScore = totalScore * 6;
 
-          set({
-            handScore: typeScore,
-            handType: "Cinco colores",
-          });
+          setHand(typeScore, "Cinco colores");
         } else if (countValues.includes(3) && countValues.includes(2)) {
           typeScore = totalScore * 7;
 
-          set({
-            handScore: typeScore,
-            handType: "Casa Llena ",
-          });
+          setHand(typeScore, "Casa Llena");
         } else if (
           countValues.includes(1) &&
           countValues.length === selectedCards.length
         ) {
           typeScore = totalScore * 2;
 
-          set({
-            handScore: typeScore,
-            handType: "Carta alta",
-          });
+          setHand(typeScore, "Carta alta");
         }
 
         if (type === 0) {
+
+          const bonus = get().calculateBonus();
+
           set({
-            goalScore: goalScore - typeScore,
+            goalScore: goalScore -(handScore + bonus),
             playAvailable: playAvailable - 1,
-            finalScore: finalScore + typeScore, // Acumular el nuevo puntaje
+            finalScore: finalScore + (handScore + bonus),
+            handScore: 0,
           });
 
           get().handleDiscardCards(1);
         }
       },
 
+      // Función para setear las cartas seleccionadas
+      setHand: (score, hand) => {
+        set({
+          handScore: score,
+          handType: hand,
+        });
+      },
+
+      // Función para calcular el bonus por las cartas seleccionadas
+      calculateBonus: () => {
+        const { handJokers } = useJokerStore.getState();
+        const { selectedCards } = useCardStore.getState();
+        const { showNotification } = useNotificationStore.getState();
+        let bonus = 0; // Inicializamos el bono en 0
+      
+        // Verificar si hay algún Joker que aplique el bonus
+        if (handJokers.length > 0) {
+          handJokers.forEach((joker) => {
+            // Verificar si el Joker aplica para el tipo de cartas jugadas
+            const cardsOfSameType = selectedCards.filter(
+              (card) => card.tipo === joker.type
+            );
+      
+            if (
+              joker.bonusType === "twoSameType" &&
+              cardsOfSameType.length >= 2
+            ) {
+              // Si el Joker es de tipo 'twoSameType' y hay al menos 2 cartas del mismo tipo
+              showNotification({
+                text: `¡Bonus 50p por ${joker.title}!`,
+                error: false,
+              });
+              bonus = 50; // Aplicamos el bono de 50
+            }
+      
+            if (
+              joker.bonusType === "allSameType" &&
+              cardsOfSameType.length === selectedCards.length
+            ) {
+              showNotification({
+                text: `¡Bonus 100p por ${joker.title}!`,
+                error: false,
+              });
+              bonus = 100; // Aplicamos el bono de 100
+            }
+          });
+        }
+      
+        return bonus; // Devolver el bono (0 si no aplica ninguno)
+      },
+      
       // Salva en localStore las puntuaciones
       saveScore: (type) => {
         const { finalScore } = get();
@@ -209,41 +237,41 @@ export const useGameStore = create(
       },
 
       // Hace que se resetee varios elementos y cambiar la puntuacion objetivo
-      nextLevel: () =>{
+      nextLevel: () => {
         const { nevelsGoal, currentLevel } = get();
         const { restartGameCards } = useCardStore.getState();
-        restartGameCards()
+        const { showModalGameJokers, showModalGameNotification} = useNotificationStore.getState();
+        restartGameCards();
 
         set({
           goalScore: nevelsGoal[currentLevel],
           discardAvailable: 3,
           playAvailable: 3,
           currentLevel: currentLevel + 1,
-        })
-
-        if ([1, 4, 7, 9, 10].includes(currentLevel)) {
-          const { showModalGameJokers } = useNotificationStore.getState();
-          showModalGameJokers()
+        });
+        // 1, 4, 7
+        if ([0, 2, 7, 9, 10].includes(currentLevel)) {
+          showModalGameJokers();
+        } else{
+          showModalGameNotification("Pasado de nivel");
         }
       },
 
       // Resetea el juego a sus valores origniales
       restartGame: () => {
-
         const { restartGameCards } = useCardStore.getState();
-        restartGameCards()
+        restartGameCards();
 
         const { restartJokers } = useJokerStore.getState();
-        restartJokers()
+        restartJokers();
 
         set({
           goalScore: 200,
           discardAvailable: 3,
           playAvailable: 3,
           currentLevel: 0,
-        })
-      }
-
+        });
+      },
     }),
     { name: "GameStore" }
   )

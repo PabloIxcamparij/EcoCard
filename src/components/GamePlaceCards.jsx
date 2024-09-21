@@ -8,8 +8,8 @@ export default function GamePlaceCards() {
     selectedCards: state.selectedCards,
     toggleCardId: state.toggleCardId,
   }));
-
   // Sound for activating and deactivating cards
+
   const activationSound = new Howl({
     src: ["/songs/Effect-Card-Start.mp3"],
     volume: 0.5,

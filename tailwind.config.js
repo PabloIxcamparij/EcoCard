@@ -18,6 +18,18 @@ module.exports = {
         'custom-green-light-alternative': '#72B01D',
         'custom-green-dark-alternative': '#3F7D20',
       },
+
+      keyframes: {
+        shake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '25%': { transform: 'translateX(-5px)' },
+          '75%': { transform: 'translateX(5px)' },
+        },
+      },
+      animation: {
+        shake: 'shake 0.5s ease-in-out',
+      },
+      
     },
   },
   darkMode: "class",

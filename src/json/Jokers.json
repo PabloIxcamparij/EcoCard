@@ -22,7 +22,7 @@
       "color": "#a4a3a3",
       "description": "Usas bolsas transparentes para el papel; + 50p al jugar con 2 cartas de papel.",
       "bonusType": "twoSameType",
-      "type": "papel y cartón"
+      "type": "papel y carton"
     },
     {
       "id": 4,
@@ -30,7 +30,7 @@
       "color": "#a4a3a3",
       "description": "Sabes que no se puede reciclar papel mojado; + 100p al jugar solo con papel.",
       "bonusType": "allSameType",
-      "type": "papel y cartón"
+      "type": "papel y carton"
     },
     {
       "id": 5,
