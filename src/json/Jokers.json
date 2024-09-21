@@ -69,6 +69,7 @@
       "title": "Dos son mejor que uno",
       "color": "#F5A524",
       "description": "Multiplica * 2 el puntaje al jugar dos pares",
+      "multiplier": 2,
       "bonusType": "card",
       "type": "Doble Par"
     },
@@ -76,6 +77,7 @@
       "title": "Tres iguales",
       "color": "#99C7FB",
       "description": "Multiplica * 1.5 el puntaje al jugar tres cartas del mismo valor",
+      "multiplier": 1.5,
       "bonusType": "card",
       "type": "Trio de valores"
     },
@@ -83,6 +85,7 @@
       "title": "Colores a juego",
       "color": "#99C7FB",
       "description": "Multiplica * 1.5 el puntaje al jugar tres cartas del mismo color",
+      "multiplier": 1.5,
       "bonusType": "card",
       "type": "Trio de colores"
     },
@@ -90,6 +93,7 @@
       "title": "Todas iguales",
       "color": "#F31260",
       "description": "Multiplica * 1.5 el puntaje al jugar cinco cartas del mismo color",
+      "multiplier": 1.5,
       "bonusType": "card",
       "type": "Cinco colores"
     },
@@ -97,6 +101,7 @@
       "title": "Hotel",
       "color": "#17C964",
       "description": "Multiplica * 1.5 el puntaje al jugar una Casa Llena",
+      "multiplier": 1.5,
       "bonusType": "card",
       "type": "Casa Llena"
     }

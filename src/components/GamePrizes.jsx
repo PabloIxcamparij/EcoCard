@@ -1,5 +1,6 @@
 import React from "react";
 import { useNotificationStore } from "../stores/useNotificationStore";
+import { useGameStore } from "../stores/useGameStore";
 
 import {
   Modal,
@@ -16,6 +17,11 @@ export default function GamePrizes() {
     hideModalGameJokers: state.hideModalGameJokers,
     showModalJoker: state.showModalJoker
   }));
+
+  const { plusHand } = useGameStore((state) => ({
+    plusHand: state.plusHand,
+  }));
+  
 
   return (
     <Modal
@@ -36,7 +42,10 @@ export default function GamePrizes() {
                 className="w-full text-xl font-semibold"
                 color="danger"
                 variant="ghost"
-                onClick={hideModalGameJokers}
+                onClick={() => {
+                  plusHand(1)
+                  hideModalGameJokers()
+                }}
               >
                 +Descarte
               </Button>
@@ -44,7 +53,10 @@ export default function GamePrizes() {
                 className="w-full text-xl font-semibold"
                 color="success"
                 variant="ghost"
-                onClick={hideModalGameJokers}
+                onClick={() => {
+                  plusHand(0)
+                  hideModalGameJokers()
+                }}
               >
                 +Jugada
               </Button>
