@@ -50,20 +50,20 @@ export default function GameMenu() {
           <div className="text-center flex flex-wrap justify-center">
             <div className="flex justify-between w-full gap-2">
               <NavLink to="/" className="w-3/12">
-                <Button className="bg-custom-green-dark">
-                  <HomeIcon className="h-8 text-white" />
+                <Button variant="light">
+                  <HomeIcon className="h-8 text0" />
                 </Button>
               </NavLink>
 
               <Button
-                color="danger"
+                variant="light"
                 className="w-3/12"
                 onClick={() => {
                   restartGame();
                   hideModalGameMenu();
                 }}
               >
-                <ArrowPathIcon className="h-8 text-white" />
+                <ArrowPathIcon className="h-8" />
               </Button>
             </div>
 

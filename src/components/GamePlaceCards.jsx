@@ -23,7 +23,8 @@ export default function GamePlaceCards() {
   return (
     <div>
       {/* Cartas seleccionadas */}
-      <div className="h-2/4 w-full bg-custom-gray rounded-xl flex flex-wrap justify-around items-center gap-4 p-4">
+      <div className="h-2/4 w-full border border-custom-gray rounded-xl flex flex-wrap justify-around items-center gap-4 p-4">
+
         {handCards.map((card) => (
           <div
             key={card.id}
@@ -40,7 +41,7 @@ export default function GamePlaceCards() {
             }}
             className={`flex justify-center items-center w-20 h-28 rounded-lg transition-transform duration-200 ease-in-out ${
               selectedCards.includes(card)
-                ? "transform scale-110 shadow-lg border-4 border-custom-white"
+                ? "transform scale-110 shadow-lg border-4 border-custom-gray"
                 : ""
             } `}
             style={{ backgroundColor: card.color }}

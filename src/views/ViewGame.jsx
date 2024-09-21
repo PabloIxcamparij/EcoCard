@@ -67,7 +67,7 @@ export default function ViewGame() {
   });
 
   return (
-<div className="flex flex-col min-h-screen items-center text-white bg-custom-white p-4">
+<div className="flex flex-col min-h-screen items-center text-white  p-4">
 <NotificationGeneral />
       <NotificationGame />
       <GamePrizes />

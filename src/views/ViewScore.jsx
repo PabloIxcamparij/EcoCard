@@ -27,7 +27,7 @@ export default function ViewScore() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-custom-white p-5">
+    <div className="min-h-scree p-5">
       <NavLink to="/" className="w-3/5 -ml-4">
         <Button className="bg-transparent">
           <HomeIcon className="h-10 w-10 text-custom-green-dark" />
