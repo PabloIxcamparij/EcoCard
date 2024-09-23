@@ -3,28 +3,28 @@
     {
       "title": "Vidrio Roto",
       "color": "#BC4749",
-      "description": "El vidrio ha roto la bolsa, este tipo no se tomarán en cuenta.",
+      "description": "No se han usado las bolsas correctas para el vidrio, las cartas no valen.",
       "limityType": "noPlay",
       "type": "vidrio"
     },
     {
-      "title": "Papel Mojado",
+      "title": "Carton Mojado",
       "color": "#BC4749",
-      "description": "El papel y cartón se han mojado, este tipo no se tomarán en cuenta.",
+      "description": "Ha estado lloviendo tanto que se han mojado las cajas que se iban a reciclar, las cartas no valen.",
       "limityType": "noPlay",
       "type": "papel y carton"
     },
     {
       "title": "Envases Sucios",
       "color": "#BC4749",
-      "description": "Envases contaminados con restos de alimento, este tipo no se tomarán en cuenta.",
+      "description": "Se han olvido de limpiar los envases, y en esto han crecido hongos, las cartas no valen.",
       "limityType": "noPlay",
       "type": "envases"
     },
     {
-      "title": "Aluminio Mezclado",
+      "title": "Aluminio sin brillo",
       "color": "#BC4749",
-      "description": "El aluminio se ha mezclado con otros materiales, este tipo no se tomarán en cuenta.",
+      "description": "Las latas que ibas a reciclar por un descuido se pusieron junto a la basura, las cartas no valen.",
       "limityType": "noPlay",
       "type": "aluminio"
     }

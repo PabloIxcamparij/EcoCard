@@ -50,7 +50,7 @@ export const useNotificationStore = create(
 
         setTimeout(() => {
           get().hideModalGameNotification();
-        }, 1500);
+        }, 5000);
       },
 
       // Función para ocultar el modal NotificationGame

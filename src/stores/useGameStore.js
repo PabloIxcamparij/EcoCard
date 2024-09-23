@@ -9,14 +9,13 @@ const calculateTotalScore = (cards) => {
   return cards.reduce((sum, card) => sum + card.puntaje, 0);
 };
 
-const nevels = [300, 350, 400, 500]
-  // , 550, 600, 700, 750, 800, 900, 950, 1000, 1100, 1150, 1200];
+const nevels = [300, 350, 400, 500];
+// , 550, 600, 700, 750, 800, 900, 950, 1000, 1100, 1150, 1200];
 
 const levelTriggers = {
-  joker: [1, 3, 5, 7, 9, 11, 13],
-  hardLevel: [2, 10, 14]
+  joker: [0, 4, 5, 7, 9, 11, 13],
+  hardLevel: [1, 10, 14],
 };
-
 
 export const useGameStore = create(
   devtools(
@@ -196,82 +195,43 @@ export const useGameStore = create(
         const { handJokers } = useJokerStore.getState();
         const { selectedCards } = useCardStore.getState();
         const { showNotification } = useNotificationStore.getState();
+
         let bonus = 0; // Inicializamos el bono en 0
         let multiplier = 1; // Multiplicador por defecto
 
-        // Verificar si hay algún Joker que aplique el bonus
         if (handJokers.length > 0) {
-          handJokers.forEach((joker) => {
 
-            // Bonos basados en el tipo de cartas jugadas (handType)
-            if (joker.bonusType === "card") {
-              switch (joker.type) {
-                case "Par":
-                  if (handType === "Par") {
-                    multiplier = joker.multiplier;
-                    showNotification({
-                      text: `¡Bonus multiplicador x${joker.multiplier} por ${joker.title}!`,
-                      error: false,
-                    });
-                  }
-                  break;
+          // Filtrar los Jokers en dos grupos: no-card y card
+          const nonCardJokers = handJokers.filter(
+            (joker) => joker.bonusType !== "card"
+          );
 
-                case "Doble Par":
-                  if (handType === "Doble Par") {
-                    multiplier = joker.multiplier;
-                    showNotification({
-                      text: `¡Bonus multiplicador x${joker.multiplier} por ${joker.title}!`,
-                      error: false,
-                    });
-                  }
-                  break;
+          const cardJokers = handJokers.filter(
+            (joker) => joker.bonusType === "card"
+          );
 
-                case "Trio de valores":
-                  if (handType === "Trio de valores") {
-                    multiplier = joker.multiplier;
-                    showNotification({
-                      text: `¡Bonus multiplicador x${joker.multiplier} por ${joker.title}!`,
-                      error: false,
-                    });
-                  }
-                  break;
+          // Procesar primero los Jokers que no son de tipo "card"
+          [...nonCardJokers, ...cardJokers].forEach((joker) => {
 
-                case "Trio de colores":
-                  if (handType === "Trio de colores") {
-                    multiplier = joker.multiplier;
-                    showNotification({
-                      text: `¡Bonus multiplicador x${joker.multiplier} por ${joker.title}!`,
-                      error: false,
-                    });
-                  }
-                  break;
+            // Verificar el bonus basado en combinación de cartas (nuevo)
+            if (joker.bonusType === "combination") {
+              const hasType1 = selectedCards.some(
+                (card) => card.tipo === joker.type
+              );
+              const hasType2 = selectedCards.some(
+                (card) => card.tipo === joker.type2
+              );
 
-                case "Cinco colores":
-                  if (handType === "Cinco colores") {
-                    multiplier = joker.multiplier;
-                    showNotification({
-                      text: `¡Bonus multiplicador x${joker.multiplier} por ${joker.title}!`,
-                      error: false,
-                    });
-                  }
-                  break;
-
-                case "Casa Llena":
-                  if (handType === "Casa Llena") {
-                    multiplier = joker.multiplier;
-                    showNotification({
-                      text: `¡Bonus multiplicador x${joker.multiplier} por ${joker.title}!`,
-                      error: false,
-                    });
-                  }
-                  break;
-
-                default:
-                  break;
+              if (hasType1 && hasType2) {
+                bonus += 100; // Añadir el bonus de 100 puntos
+                showNotification({
+                  text: `¡Bonus 100p por combinación de ${joker.type} y ${joker.type2} gracias a ${joker.title}!`,
+                  error: false,
+                });
               }
             }
 
-            // Verificar si el Joker aplica para el tipo de cartas jugadas (existentes)
+            // Verificar si el Joker aplica para dos cartas del mismo tipo
             const cardsOfSameType = selectedCards.filter(
               (card) => card.tipo === joker.type
             );
@@ -280,22 +240,69 @@ export const useGameStore = create(
               joker.bonusType === "twoSameType" &&
               cardsOfSameType.length >= 2
             ) {
+              bonus += 80;
               showNotification({
-                text: `¡Bonus 50p por ${joker.title}!`,
+                text: `¡Bonus 80p!`,
                 error: false,
               });
-              bonus = 50;
             }
 
+            // Verificar si todas las cartas son del mismo tipo
             if (
               joker.bonusType === "allSameType" &&
               cardsOfSameType.length === selectedCards.length
             ) {
+              bonus += 120;
               showNotification({
-                text: `¡Bonus 100p por ${joker.title}!`,
+                text: `¡Bonus 120p}!`,
                 error: false,
               });
-              bonus = 100;
+            }
+
+            // Bonos basados en el tipo de mano jugada (solo tipo "card")
+            if (joker.bonusType === "card") {
+              switch (joker.type) {
+                case "Par":
+                  if (handType === "Par") {
+                    multiplier = joker.multiplier;
+
+                  }
+                  break;
+
+                case "Doble Par":
+                  if (handType === "Doble Par") {
+                    multiplier = joker.multiplier;
+
+                  }
+                  break;
+
+                case "Trio de valores":
+                  if (handType === "Trio de valores") {
+                    multiplier = joker.multiplier;
+                  }
+                  break;
+
+                case "Trio de colores":
+                  if (handType === "Trio de colores") {
+                    multiplier = joker.multiplier;
+                  }
+                  break;
+
+                case "Cinco colores":
+                  if (handType === "Cinco colores") {
+                    multiplier = joker.multiplier;
+                  }
+                  break;
+
+                case "Casa Llena":
+                  if (handType === "Casa Llena") {
+                    multiplier = joker.multiplier;
+                  }
+                  break;
+
+                default:
+                  break;
+              }
             }
           });
         }
@@ -303,7 +310,7 @@ export const useGameStore = create(
         // Aplicar el multiplicador a los puntos de la mano
         const finalBonus = (get().handScore + bonus) * multiplier;
 
-        return finalBonus; // Devolver el bonus calculado (0 si no aplica ninguno)
+        return finalBonus; // Devolver el bonus calculado
       },
 
       // Funcion para sumar a las manos un +1 de acuedo a que tipo se escoga
@@ -347,6 +354,21 @@ export const useGameStore = create(
         });
       },
 
+      restarScores: () => {
+        // Borra las puntuaciones almacenadas en localStorage
+        localStorage.removeItem("winsScore");
+        localStorage.removeItem("lostScore");
+      
+        // Restablece los estados locales a listas vacías
+        set({
+          savedMatchWinsScores: [],
+          savedMatchLotScores: [],
+        });
+      
+        console.log("Puntuaciones reiniciadas.");
+      },
+      
+
       // Hace que se resetee varios elementos y cambiar la puntuación objetivo
       nextLevel: () => {
         const { nevelsGoal, currentLevel } = get();
@@ -360,18 +382,17 @@ export const useGameStore = create(
 
         // Reiniar la limitacion para limpiar el campo de juego
         restartLimity();
-        
+
         // Reiniciar cartas y cambiar el puntaje objetivo
-         restartGameCards();
+        restartGameCards();
 
         if (levelTriggers.joker.includes(currentLevel)) {
           showModalGameJokers();
-
         } else if (levelTriggers.hardLevel.includes(currentLevel)) {
           showModalGameHardLevel();
         }
 
-        if (currentLevel === 3) {
+        if (currentLevel === 2) {
           showModalGameNotification("Ganado, Felicidades !! Gracias por jugar");
 
           get().saveScore(0);
@@ -386,7 +407,6 @@ export const useGameStore = create(
 
           // Si el modal ya no está activo, continuar con la ejecución
           if (!updatedShowModalJoker) {
-
             // Detener el intervalo
             clearInterval(checkModalStatus);
 
