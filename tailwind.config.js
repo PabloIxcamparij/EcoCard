@@ -7,6 +7,11 @@ module.exports = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+
+    screens: {
+      'xs': '370px',
+    },
+    
     extend: {
       colors: {
         'custom-green': '#6A994E',
@@ -30,6 +35,10 @@ module.exports = {
         shake: 'shake 0.5s ease-in-out',
       },
       
+      backgroundImage: {
+        'custom-bg': "url('/img/back-02.jpg')",
+      },
+
     },
   },
   darkMode: "class",

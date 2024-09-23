@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Button } from "@nextui-org/react";
 import { NavLink } from "react-router-dom";
-import { HomeIcon } from "@heroicons/react/20/solid";
+import { HomeIcon, ArrowPathIcon } from "@heroicons/react/20/solid";
 import { useGameStore } from "../stores/useGameStore";
 import {
   Table,
@@ -13,9 +13,10 @@ import {
 } from "@nextui-org/react";
 
 export default function ViewScore() {
-  const { loadScore, savedMatchWinsScores, savedMatchLotScores } = useGameStore(
+  const { restarScores, loadScore, savedMatchWinsScores, savedMatchLotScores } = useGameStore(
     (state) => ({
       loadScore: state.loadScore,
+      restarScores: state.restarScores,
       savedMatchWinsScores: state.savedMatchWinsScores,
       savedMatchLotScores: state.savedMatchLotScores,
     })
@@ -28,11 +29,25 @@ export default function ViewScore() {
 
   return (
     <div className="min-h-scree p-5">
-      <NavLink to="/" className="w-3/5 -ml-4">
-        <Button className="bg-transparent">
-          <HomeIcon className="h-10 w-10 text-custom-green-dark" />
+      <div className="flex justify-between w-full gap-10">
+        
+        <NavLink to="/" className="w-3/5">
+          <Button className="bg-transparent">
+            <HomeIcon className="h-10 w-10 text-custom-green-dark" />
+          </Button>
+        </NavLink>
+
+        <Button
+          color="danger"
+          variant="light"
+          className="w-20"
+          onClick={() => {
+            restarScores()
+          }}
+        >
+          <ArrowPathIcon className="h-8" />
         </Button>
-      </NavLink>
+      </div>
 
       <div className="flex flex-col items-center">
         <h1 className="text-2xl font-bold text-center mb-5">

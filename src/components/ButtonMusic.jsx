@@ -12,7 +12,7 @@ export default function ButtonMusic() {
     <button
       onClick={toggleMusic}
       className={`w-3/12 flex justify-center items-center rounded-xl p-1 gap-1 ${
-        isPlaying ? "bg-custom-red" : "bg-custom-green-light"
+        isPlaying ? "bg-danger" : "bg-green-600"
       } text-white font-bold text-2xl`}
     >
       {isPlaying ? (

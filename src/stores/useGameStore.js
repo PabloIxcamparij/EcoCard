@@ -9,12 +9,11 @@ const calculateTotalScore = (cards) => {
   return cards.reduce((sum, card) => sum + card.puntaje, 0);
 };
 
-const nevels = [300, 350, 400, 500];
-// , 550, 600, 700, 750, 800, 900, 950, 1000, 1100, 1150, 1200];
+const nevels = [300, 350, 400, 500, 550, 600, 700, 750, 800, 900, 950, 1000, 1100, 1150, 1200];
 
 const levelTriggers = {
-  joker: [0, 4, 5, 7, 9, 11, 13],
-  hardLevel: [1, 10, 14],
+  joker: [2, 4, 6, 8, 10, 12, 13],
+  hardLevel: [5, 9, 14],
 };
 
 export const useGameStore = create(
@@ -368,7 +367,6 @@ export const useGameStore = create(
         console.log("Puntuaciones reiniciadas.");
       },
       
-
       // Hace que se resetee varios elementos y cambiar la puntuación objetivo
       nextLevel: () => {
         const { nevelsGoal, currentLevel } = get();

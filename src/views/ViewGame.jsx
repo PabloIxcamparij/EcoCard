@@ -31,7 +31,7 @@ export default function ViewGame() {
     handType,
     nextLevel,
     restartGame,
-    currentLevel
+    currentLevel,
   } = useGameStore((state) => ({
     discardAvailable: state.discardAvailable,
     playAvailable: state.playAvailable,
@@ -40,7 +40,7 @@ export default function ViewGame() {
     handType: state.handType,
     nextLevel: state.nextLevel,
     restartGame: state.restartGame,
-    currentLevel: state.currentLevel
+    currentLevel: state.currentLevel,
   }));
 
   useEffect(() => {
@@ -68,36 +68,37 @@ export default function ViewGame() {
   });
 
   return (
-    <div className="flex flex-col min-h-screen items-center text-white  p-4">
+    <div className="flex flex-col min-h-screen items-center text-white bg-gray-100 p-4">
       <NotificationGeneral />
       <NotificationGame />
       <GamePrizes />
       <GameHardLevel />
 
-      <div className="flex justify-around items-center w-full h-12">
-        <Button
-          className="bg-transparent"
-          onClick={() => {
-            useNotificationStore.getState().showModalGameMenu();
-          }}
-        >
-          <Bars3Icon className="h-10 w-10 text-custom-gray" />
-          <GameMenu />
-        </Button>
+      <div className="flex flex-col items-center w-full text-gray-700 font-bold">
+        <div className="flex justify-between items-center w-full mb-4">
+          <Button
+            className="bg-transparent"
+            onClick={() => {
+              useNotificationStore.getState().showModalGameMenu();
+            }}
+          >
+            <Bars3Icon className="h-10 w-10 text-custom-gray" />
+            <GameMenu />
+          </Button>
 
-        <GameHeader title={"Valor"} score={handScore} />
-        <GameHeader title={"Tipo"} score={handType} />
+          <h1 className="text-center">{`Objetivo: ${goalScore}`}</h1>
+
+          <h1 >{`Nivel: ${currentLevel + 1}`}</h1>
+        </div>
+
+
+        <div className="flex justify-center w-full">
+          <GameHeader title={"Valor"} score={handScore} className="mx-4" />
+          <GameHeader title={"Tipo"} score={handType} className="mx-4" />
+        </div>
       </div>
 
-      <div className="w-full text-danger font-bold text-lg text-center mt-4">
-      <GameHeader title={"Nivel"} score={currentLevel + 1} />
-
-        <h1>
-          {"Objetivo:"} {goalScore}
-        </h1>
-      </div>
-
-      <div className="flex flex-wrap justify-around items-center w-full gap-6 mt-5 mb-2">
+      <div className="flex flex-wrap justify-center items-center w-full gap-6 mt-5 mb-2">
         <Button
           className="rounded-full w-2/5 font-bold text-xl"
           color="danger"

@@ -28,7 +28,7 @@ export default function GamePlaceCards() {
   return (
     <div>
       {/* Cartas seleccionadas */}
-      <div className="h-2/4 w-full border border-custom-gray rounded-xl flex flex-wrap justify-around items-center gap-4 p-4">
+      <div className="h-2/4 w-full border-t-4 border-b-8 border-custom-gray rounded-xl flex flex-wrap justify-around items-center gap-4 p-4">
         {handCards.map((card) => {
           // Determine the background color
           const backgroundColor =
@@ -50,12 +50,12 @@ export default function GamePlaceCards() {
                   activationSound.play(); // Play activation sound
                 }
               }}
-              className={`flex justify-center items-center w-20 h-28 rounded-lg transition-transform duration-200 ease-in-out ${
+              className={`flex justify-center items-center rounded-lg transition-transform duration-200 ease-in-out ${
                 selectedCards.includes(card)
                   ? "transform scale-110 shadow-lg border-4 border-custom-gray"
                   : ""
-              }`}
-              style={{ backgroundColor }} // Use the determined background color
+              } w-16 h-24 xs:w-20 xs:h-28`} // Cambiar tamaños según el ancho de pantalla
+              style={{ backgroundColor }}
             >
               <span className="text-4xl font-bold">{card.valor}</span>
             </div>
