@@ -8,6 +8,7 @@ import { Bars3Icon } from "@heroicons/react/20/solid";
 import NotificationGeneral from "../components/NotificationGeneral";
 import NotificationGame from "../components/NotificationGame";
 import GamePlaceCards from "../components/GamePlaceCards";
+import GameHardLevel from "../components/GameHardLevel";
 import GameHeader from "../components/GameHeader";
 import GamePrizes from "../components/GamePrizes";
 import GameMenu from "../components/GameMenu";
@@ -30,6 +31,7 @@ export default function ViewGame() {
     handType,
     nextLevel,
     restartGame,
+    currentLevel
   } = useGameStore((state) => ({
     discardAvailable: state.discardAvailable,
     playAvailable: state.playAvailable,
@@ -38,6 +40,7 @@ export default function ViewGame() {
     handType: state.handType,
     nextLevel: state.nextLevel,
     restartGame: state.restartGame,
+    currentLevel: state.currentLevel
   }));
 
   useEffect(() => {
@@ -50,9 +53,7 @@ export default function ViewGame() {
 
   useEffect(() => {
     if (playAvailable === 0 && goalScore > 0) {
-      useNotificationStore
-        .getState()
-        .showModalGameNotification("Perdido");
+      useNotificationStore.getState().showModalGameNotification("Perdido");
       restartGame();
       useGameStore.getState().saveScore(1);
     } else if (goalScore <= 0) {
@@ -67,10 +68,11 @@ export default function ViewGame() {
   });
 
   return (
-<div className="flex flex-col min-h-screen items-center text-white  p-4">
-<NotificationGeneral />
+    <div className="flex flex-col min-h-screen items-center text-white  p-4">
+      <NotificationGeneral />
       <NotificationGame />
       <GamePrizes />
+      <GameHardLevel />
 
       <div className="flex justify-around items-center w-full h-12">
         <Button
@@ -88,6 +90,8 @@ export default function ViewGame() {
       </div>
 
       <div className="w-full text-danger font-bold text-lg text-center mt-4">
+      <GameHeader title={"Nivel"} score={currentLevel + 1} />
+
         <h1>
           {"Objetivo:"} {goalScore}
         </h1>

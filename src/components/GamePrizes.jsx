@@ -27,7 +27,6 @@ export default function GamePrizes() {
     <Modal
       className="w-4/5"
       isOpen={showModalJoker}
-      onOpenChange={hideModalGameJokers}
       placement="center"
     >
       <ModalContent>

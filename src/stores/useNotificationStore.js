@@ -14,6 +14,7 @@ export const useNotificationStore = create(
       // Estado del modal
       showModalMenu: false,
       showModalJoker: false,
+      showModalHardLevel: false,
       showModalNotification: false,
       message: "",
 
@@ -73,21 +74,34 @@ export const useNotificationStore = create(
           showModalMenu: false,
         });
       },
-      
+
       // Función para mostrar el modal GameJokers
-      showModalGameJokers: () =>{
+      showModalGameJokers: () => {
         set({
           showModalJoker: true,
         });
       },
 
       // Función para ocultar el modal GameJokers
-      hideModalGameJokers: () =>{
+      hideModalGameJokers: () => {
         set({
           showModalJoker: false,
         });
-      }
+      },
 
+      // Función para mostrar el modal GameHardLevel
+      showModalGameHardLevel: () => {
+        set({
+          showModalHardLevel: true,
+        });
+      },
+
+      // Función para ocultar el modal GameHardLevel
+      hideModalGameHardLevel: () => {
+        set({
+          showModalHardLevel: false,
+        });
+      },
     }),
     { name: "NotificationStore" }
   )

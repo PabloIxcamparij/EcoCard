@@ -1,0 +1,32 @@
+{
+  "Limity": [
+    {
+      "title": "Vidrio Roto",
+      "color": "#BC4749",
+      "description": "El vidrio ha roto la bolsa, este tipo no se tomarán en cuenta.",
+      "limityType": "noPlay",
+      "type": "vidrio"
+    },
+    {
+      "title": "Papel Mojado",
+      "color": "#BC4749",
+      "description": "El papel y cartón se han mojado, este tipo no se tomarán en cuenta.",
+      "limityType": "noPlay",
+      "type": "papel y carton"
+    },
+    {
+      "title": "Envases Sucios",
+      "color": "#BC4749",
+      "description": "Envases contaminados con restos de alimento, este tipo no se tomarán en cuenta.",
+      "limityType": "noPlay",
+      "type": "envases"
+    },
+    {
+      "title": "Aluminio Mezclado",
+      "color": "#BC4749",
+      "description": "El aluminio se ha mezclado con otros materiales, este tipo no se tomarán en cuenta.",
+      "limityType": "noPlay",
+      "type": "aluminio"
+    }
+  ]
+}

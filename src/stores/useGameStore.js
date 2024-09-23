@@ -1,12 +1,22 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { useCardStore } from "./useCardStore"; // Importar el useCardStore para acceder a los datos
-import { useNotificationStore } from "./useNotificationStore"; // Para acceder al store de notificaciones
+import { useCardStore } from "./useCardStore";
+import { useLevelLimity } from "./useLevelLimity";
+import { useNotificationStore } from "./useNotificationStore";
 import { useJokerStore } from "./useJokerStore";
 
 const calculateTotalScore = (cards) => {
   return cards.reduce((sum, card) => sum + card.puntaje, 0);
 };
+
+const nevels = [300, 350, 400, 500]
+  // , 550, 600, 700, 750, 800, 900, 950, 1000, 1100, 1150, 1200];
+
+const levelTriggers = {
+  joker: [1, 3, 5, 7, 9, 11, 13],
+  hardLevel: [2, 10, 14]
+};
+
 
 export const useGameStore = create(
   devtools(
@@ -15,19 +25,14 @@ export const useGameStore = create(
       numberdiscards: 3,
       playAvailable: 3,
       discardAvailable: 3,
-      nevelsGoal: [
-        300, 350, 500, 700, 800, 1000, 1050, 1200, 1400, 1500, 1600, 1650, 1800,
-        2000,
-      ], //All nevels of the game
-      currentLevel: 0, //Current position in the game
-      goalScore: 200, //First level is 200
+      nevelsGoal: nevels,
+      currentLevel: 0,
+      goalScore: 200,
       handScore: 0,
+      handType: "",
       finalScore: 0,
       savedMatchWinsScores: [],
       savedMatchLotScores: [],
-      handType: "",
-      gameWin: false,
-      passPhase: false,
 
       // Función para descartar y obtener nuevas cartas aleatorias
       // El type es para saber si es un descarte o es una jugada
@@ -75,10 +80,10 @@ export const useGameStore = create(
 
       // Función para jugar las cartas seleccionadas
       handlePlayCards: (type) => {
+        const { handLimity } = useLevelLimity.getState();
         const { selectedCards } = useCardStore.getState();
         const { showNotification } = useNotificationStore.getState();
-        const { playAvailable, goalScore, finalScore, handScore, setHand } =
-          get();
+        const { playAvailable, goalScore, finalScore, setHand } = get();
 
         if (selectedCards.length === 0) {
           if (type === 0) {
@@ -92,11 +97,43 @@ export const useGameStore = create(
           return;
         }
 
+        if (handLimity !== null) {
+          const limitType = handLimity.type;
+
+          // Filtrar selectedCards para quitar cartas que tengan el mismo tipo que limitType
+          const filteredCards = selectedCards.filter(
+            (card) => card.tipo !== limitType
+          );
+
+          // Llamar a la función con el nuevo array filtrado
+          get().calculatehands(filteredCards);
+        } else {
+          // Llamar la funcion para calcular el selector de cartas
+          get().calculatehands(selectedCards);
+        }
+
+        // Si se trata de una jugada se debe de realizar los siguientes cambios
+
+        if (type === 0) {
+          const bonus = get().calculateBonus();
+
+          set({
+            goalScore: goalScore - bonus,
+            playAvailable: playAvailable - 1,
+            finalScore: finalScore + bonus,
+          });
+
+          get().handleDiscardCards(1);
+        }
+      },
+
+      // Funcion para calcular el valor de las manos jugadas
+      calculatehands: (cards) => {
+        const { setHand } = get();
+
         let typeScore = 0;
 
-        const sortedCards = [...selectedCards].sort(
-          (a, b) => a.valor - b.valor
-        );
+        const sortedCards = [...cards].sort((a, b) => a.valor - b.valor);
 
         const values = sortedCards.map((card) => card.valor);
         const colors = sortedCards.map((card) => card.color);
@@ -109,7 +146,7 @@ export const useGameStore = create(
         const countValues = Object.values(counts);
 
         // Calcular el puntaje total de las cartas seleccionadas
-        const totalScore = calculateTotalScore(selectedCards);
+        const totalScore = calculateTotalScore(cards);
 
         if (countValues.includes(2) && countValues.length === 1) {
           typeScore = totalScore * 3;
@@ -127,7 +164,7 @@ export const useGameStore = create(
           typeScore = totalScore * 5;
 
           setHand(typeScore, "Trio de colores");
-        } else if (new Set(colors).size === 1 && selectedCards.length === 5) {
+        } else if (new Set(colors).size === 1 && cards.length === 5) {
           typeScore = totalScore * 6;
 
           setHand(typeScore, "Cinco colores");
@@ -137,24 +174,11 @@ export const useGameStore = create(
           setHand(typeScore, "Casa Llena");
         } else if (
           countValues.includes(1) &&
-          countValues.length === selectedCards.length
+          countValues.length === cards.length
         ) {
           typeScore = totalScore * 2;
 
           setHand(typeScore, "Carta alta");
-        }
-
-        if (type === 0) {
-          const bonus = get().calculateBonus();
-
-          set({
-            goalScore: goalScore - bonus,
-            playAvailable: playAvailable - 1,
-            finalScore: finalScore + bonus,
-            handScore: 0,
-          });
-
-          get().handleDiscardCards(1);
         }
       },
 
@@ -178,6 +202,7 @@ export const useGameStore = create(
         // Verificar si hay algún Joker que aplique el bonus
         if (handJokers.length > 0) {
           handJokers.forEach((joker) => {
+
             // Bonos basados en el tipo de cartas jugadas (handType)
             if (joker.bonusType === "card") {
               switch (joker.type) {
@@ -255,12 +280,11 @@ export const useGameStore = create(
               joker.bonusType === "twoSameType" &&
               cardsOfSameType.length >= 2
             ) {
-              // Si el Joker es de tipo 'twoSameType' y hay al menos 2 cartas del mismo tipo
               showNotification({
                 text: `¡Bonus 50p por ${joker.title}!`,
                 error: false,
               });
-              bonus = 50; // Aplicamos el bono de 50
+              bonus = 50;
             }
 
             if (
@@ -271,14 +295,13 @@ export const useGameStore = create(
                 text: `¡Bonus 100p por ${joker.title}!`,
                 error: false,
               });
-              bonus = 100; // Aplicamos el bono de 100
+              bonus = 100;
             }
           });
         }
 
         // Aplicar el multiplicador a los puntos de la mano
-        const handScore = get().handScore;
-        const finalBonus = (handScore + bonus) * multiplier;
+        const finalBonus = (get().handScore + bonus) * multiplier;
 
         return finalBonus; // Devolver el bonus calculado (0 si no aplica ninguno)
       },
@@ -327,23 +350,34 @@ export const useGameStore = create(
       // Hace que se resetee varios elementos y cambiar la puntuación objetivo
       nextLevel: () => {
         const { nevelsGoal, currentLevel } = get();
+        const { restartLimity } = useLevelLimity.getState();
         const { restartGameCards } = useCardStore.getState();
-        const { showModalGameJokers, showModalGameNotification } =
-          useNotificationStore.getState();
+        const {
+          showModalGameJokers,
+          showModalGameNotification,
+          showModalGameHardLevel,
+        } = useNotificationStore.getState();
 
-        // 1, 4, 7
-        if ([1, 4, 7, 9, 10].includes(currentLevel)) {
+        // Reiniar la limitacion para limpiar el campo de juego
+        restartLimity();
+        
+        // Reiniciar cartas y cambiar el puntaje objetivo
+         restartGameCards();
+
+        if (levelTriggers.joker.includes(currentLevel)) {
           showModalGameJokers();
-        } else if (currentLevel === 13) {
+
+        } else if (levelTriggers.hardLevel.includes(currentLevel)) {
+          showModalGameHardLevel();
+        }
+
+        if (currentLevel === 3) {
           showModalGameNotification("Ganado, Felicidades !! Gracias por jugar");
 
-          get().saveScore(0)
-          get().restartGame(0)
-          return
+          get().saveScore(0);
+          get().restartGame();
+          return;
         }
-        else {
-          showModalGameNotification("Pasado de nivel");
-        } 
 
         // Verificar periódicamente si showModalJoker es false
         const checkModalStatus = setInterval(() => {
@@ -352,10 +386,9 @@ export const useGameStore = create(
 
           // Si el modal ya no está activo, continuar con la ejecución
           if (!updatedShowModalJoker) {
-            clearInterval(checkModalStatus); // Detener el intervalo
 
-            // Reiniciar cartas y cambiar el puntaje objetivo
-            restartGameCards();
+            // Detener el intervalo
+            clearInterval(checkModalStatus);
 
             set({
               goalScore: nevelsGoal[currentLevel],
@@ -364,12 +397,14 @@ export const useGameStore = create(
               currentLevel: currentLevel + 1,
             });
           }
-        }, 50)
-
+        }, 50);
       },
 
       // Resetea el juego a sus valores origniales
       restartGame: () => {
+        const { restartLimity } = useLevelLimity.getState();
+        restartLimity();
+
         const { restartGameCards } = useCardStore.getState();
         restartGameCards();
 
