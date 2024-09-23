@@ -388,14 +388,14 @@ export const useGameStore = create(
           showModalGameJokers();
         } else if (levelTriggers.hardLevel.includes(currentLevel)) {
           showModalGameHardLevel();
-        }
-
-        if (currentLevel === 2) {
+        } else if (currentLevel === 14) {
           showModalGameNotification("Ganado, Felicidades !! Gracias por jugar");
 
           get().saveScore(0);
           get().restartGame();
           return;
+        }else{
+          showModalGameNotification("Pasado de nivel");
         }
 
         // Verificar periódicamente si showModalJoker es false

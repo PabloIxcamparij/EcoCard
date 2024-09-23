@@ -34,10 +34,6 @@ module.exports = {
       animation: {
         shake: 'shake 0.5s ease-in-out',
       },
-      
-      backgroundImage: {
-        'custom-bg': "url('/img/back-02.jpg')",
-      },
 
     },
   },

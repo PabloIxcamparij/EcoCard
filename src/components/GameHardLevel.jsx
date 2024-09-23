@@ -51,10 +51,10 @@ export default function GameHardLevel() {
             >
               <div className="text-white text-center text-wrap">
                 <h1 className="text-xl font-bold">
-                  {handLimity?.title || "Título no disponible"}
+                  {handLimity?.title || "Toca para"}
                 </h1>
                 <p className="text-lg">
-                  {handLimity?.description || "Descripción no disponible"}
+                  {handLimity?.description || "Descubrir la restriccion, despues toca otra vez para cerrar"}
                 </p>
               </div>
             </Button>

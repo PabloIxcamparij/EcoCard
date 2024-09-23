@@ -51,11 +51,12 @@ export default function GameMenu() {
             <div className="flex justify-between w-full gap-2">
               <NavLink to="/" className="w-3/12">
                 <Button variant="light">
-                  <HomeIcon className="h-8 text0" />
+                  <HomeIcon className="h-8 text-green-600" />
                 </Button>
               </NavLink>
 
               <Button
+                color="danger"
                 variant="light"
                 className="w-3/12"
                 onClick={() => {
