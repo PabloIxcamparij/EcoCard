@@ -25,7 +25,7 @@
       "title": "Solo seco",
       "color": "#a4a3a3",
       "description": "Eres cuidadoso con el papel, lo mantienes en un lugar seco; +120p al jugar solo con papel.",
-      "bonusType": "combination",
+      "bonusType": "allSameType",
       "type": "papel y carton"
     },
     {

@@ -9,7 +9,7 @@ const calculateTotalScore = (cards) => {
   return cards.reduce((sum, card) => sum + card.puntaje, 0);
 };
 
-const nevels = [300, 350, 400, 500, 550, 600, 700, 750, 800, 900, 950, 1000, 1100, 1150, 1200];
+const nevels = [300, 350, 400, 500, 550, 600, 700, 750, 800, 900, 950, 1000, 1100, 1200, 1300];
 
 const levelTriggers = {
   joker: [1, 3, 5, 7, 9, 11],
@@ -292,7 +292,7 @@ export const useGameStore = create(
                   break;
 
                 case "Casa Llena":
-                  if (handType === "Casa Llena") {
+                  if (handType === "Casa llena") {
                     multiplier = joker.multiplier;
                   }
                   break;
