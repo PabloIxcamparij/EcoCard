@@ -9,10 +9,10 @@ export default function App() {
       </div>
 
       <div className="w-full flex flex-col justify-center items-center gap-8 mt-20">
-        <ButtonMenu route={"viewGame"} title={"Jugar"} Icon={PlayCircleIcon } />
-        <ButtonMenu route={"viewScore"} title={"Puntajes"} Icon={ChartBarIcon} />
-        <ButtonMenu route={"viewRules"} title={"Reglas"} Icon={DocumentTextIcon} />
-        <ButtonMenu route={"viewRules"} title={"Descargar material"} />
+        <ButtonMenu route={"/viewGame"} title={"Jugar"} Icon={PlayCircleIcon } />
+        <ButtonMenu route={"/viewScore"} title={"Puntajes"} Icon={ChartBarIcon} />
+        <ButtonMenu route={"/viewRules"} title={"Reglas"} Icon={DocumentTextIcon} />
+        <ButtonMenu route={"/viewRules"} title={"Descargar material"} />
       </div>
     </div>
   );
