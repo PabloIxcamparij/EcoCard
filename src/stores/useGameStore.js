@@ -12,8 +12,8 @@ const calculateTotalScore = (cards) => {
 const nevels = [300, 350, 400, 500, 550, 600, 700, 750, 800, 900, 950, 1000, 1100, 1150, 1200];
 
 const levelTriggers = {
-  joker: [2, 4, 6, 8, 10, 12, 13],
-  hardLevel: [5, 9, 14],
+  joker: [1, 3, 5, 7, 9, 11],
+  hardLevel: [4, 8, 13],
 };
 
 export const useGameStore = create(
@@ -169,7 +169,7 @@ export const useGameStore = create(
         } else if (countValues.includes(3) && countValues.includes(2)) {
           typeScore = totalScore * 7;
 
-          setHand(typeScore, "Casa Llena");
+          setHand(typeScore, "Casa llena");
         } else if (
           countValues.includes(1) &&
           countValues.length === cards.length
@@ -224,7 +224,7 @@ export const useGameStore = create(
               if (hasType1 && hasType2) {
                 bonus += 100; // Añadir el bonus de 100 puntos
                 showNotification({
-                  text: `¡Bonus 100p por combinación de ${joker.type} y ${joker.type2} gracias a ${joker.title}!`,
+                  text: "¡Bonus 100p",
                   error: false,
                 });
               }
@@ -241,7 +241,7 @@ export const useGameStore = create(
             ) {
               bonus += 80;
               showNotification({
-                text: `¡Bonus 80p!`,
+                text: "¡Bonus 80p!",
                 error: false,
               });
             }
@@ -253,7 +253,7 @@ export const useGameStore = create(
             ) {
               bonus += 120;
               showNotification({
-                text: `¡Bonus 120p}!`,
+                text:"¡Bonus 120p!",
                 error: false,
               });
             }
@@ -264,14 +264,12 @@ export const useGameStore = create(
                 case "Par":
                   if (handType === "Par") {
                     multiplier = joker.multiplier;
-
                   }
                   break;
 
                 case "Doble Par":
                   if (handType === "Doble Par") {
                     multiplier = joker.multiplier;
-
                   }
                   break;
 
@@ -302,6 +300,7 @@ export const useGameStore = create(
                 default:
                   break;
               }
+
             }
           });
         }
@@ -363,8 +362,6 @@ export const useGameStore = create(
           savedMatchWinsScores: [],
           savedMatchLotScores: [],
         });
-      
-        console.log("Puntuaciones reiniciadas.");
       },
       
       // Hace que se resetee varios elementos y cambiar la puntuación objetivo
@@ -389,7 +386,7 @@ export const useGameStore = create(
         } else if (levelTriggers.hardLevel.includes(currentLevel)) {
           showModalGameHardLevel();
         } else if (currentLevel === 14) {
-          showModalGameNotification("Ganado, Felicidades !! Gracias por jugar");
+          showModalGameNotification("Ganado, felicidades! Gracias por jugar");
 
           get().saveScore(0);
           get().restartGame();

@@ -10,7 +10,7 @@
     {
       "title": "Bolsas resistente",
       "color": "#e46c0a",
-      "description": "Haces uso de bolsas que soportan la tensión ejercida; +120p al jugar solo con vidrio.",
+      "description": "Haces uso de bolsas que soportan la tensión ejercida por el vidrio; +120p al jugar solo con vidrio.",
       "bonusType": "allSameType",
       "type": "vidrio"
     },
@@ -24,7 +24,7 @@
     {
       "title": "Solo seco",
       "color": "#a4a3a3",
-      "description": "Eres cuidadoso con el papel, al mantenelo en un lugar seco un lugar; +120p al jugar solo con papel.",
+      "description": "Eres cuidadoso con el papel, lo mantienes en un lugar seco; +120p al jugar solo con papel.",
       "bonusType": "combination",
       "type": "papel y carton"
     },
@@ -45,7 +45,7 @@
     {
       "title": "No se acepta papel",
       "color": "#ffed00",
-      "description": "Sabes que el papel aluminio no entra en la categoría; + 50p al jugar con 2 cartas de aluminio.",
+      "description": "Sabes que el papel aluminio no entra en la categoría de aluminio; + 50p al jugar con 2 cartas de aluminio.",
       "bonusType": "twoSameType",
       "type": "aluminio"
     },
@@ -57,7 +57,6 @@
       "type": "aluminio"
     },
 
-
     {
       "title": "El problema del papel",
       "color": "#AE7EDE",
@@ -66,25 +65,22 @@
       "type": "aluminio",
       "type2": "papel y carton"
     },
-
     {
       "title": "Reciclaje de contenedores",
       "color": "#17C964",
-      "description": "Le encuentras lo bonito a los envaes, los reusas de envases; + 100p al jugar con aluminio y vidrio.",
+      "description": "Le encuentras lo bonito a los envaes, y los reusas; + 100p al jugar con aluminio y vidrio.",
       "bonusType": "combination",
       "type": "envases",
       "type2": "vidrio"
     },
-
     {
       "title": "!Exelente limpieza",
       "color": "#12A150",
-      "description": "A penas vacías un contenedor lo limpias y secas; + 100p al jugar con aluminio y envases.",
+      "description": "Al vaciar un contenedor lo limpias y secas; + 100p al jugar con aluminio y envases.",
       "bonusType": "combination",
       "type": "aluminio",
       "type2": "envases"
     },
-
     {
       "title": "Combinacion para el viaje",
       "color": "#F31260",

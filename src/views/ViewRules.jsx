@@ -31,28 +31,30 @@ export default function ViewRules() {
           <br />
           <p>
             <strong>Al perder</strong>, se vuelve al <strong>inicio</strong>. Y
-            pierdes cuando ya no tienes más <strong>jugadas disponibles</strong>
-            . Además, puedes <strong>seleccionar cartas</strong> para{" "}
-            <strong>descartarlas</strong> y recibiendo nuevas. Se gana
-            dependiendo de las cartas que elijas, ya que estas irán reduciendo
-            el <strong>objetivo</strong>, y cuando lo superes, ¡pasarás al{" "}
-            <strong>siguiente nivel</strong>!
+            pierdes cuando ya no tienes más <strong>jugadas disponibles</strong>.
+          </p>
+          <br />
+
+          <p>
+            Puedes <strong>seleccionar hasta 5 cartas</strong> , para jugar o para
+            <strong> descartar</strong>. Se gana  el nivel al reducir el <strong> objetivo</strong> a 0,
+            y cuando lo logras, ¡pasarás al <strong>siguiente nivel</strong>!
           </p>
           <br />
 
           <p>
             Además <strong>cada 3 niveles</strong>, recibirás un{" "}
             <strong>comodín</strong> de manera aleatoria para ayudarte en el
-            juego.
+            juego o tambien podras sumarte en la cantidad de descartas o jugadas disponibles por nivel.
           </p>
 
           <br />
 
           <p>
             !Pero, ten cuidado, ya que en ciertos niveles{" "}
-            <strong>un tipo de carta</strong>, no seran
-            <strong> valoradas </strong>, por lo que jugarlas no ayudaran a
-            superar el objtivo.
+            <strong>un tipo de carta</strong>, no tendrán
+            <strong> valor </strong>, por lo que el jugarlas no ayudaran a
+            superar el objetivo.
           </p>
 
           <br />
@@ -84,23 +86,24 @@ export default function ViewRules() {
             <li>
               <strong className="text-[#e46c0a]">Vidrio:</strong> Son las cartas
               de color 
-              <span className="text-[#e46c0a] font-bold"> naranjas</span>
-              . !ten, cuidado! que son muy cortates
+              <span className="text-[#e46c0a] font-bold"> naranjas. </span>
+              ¡Ten cuidado! que son muy cortantes.
             </li>
             <li>
               <strong className="text-gray-400">Papel y cartón:</strong> Son las
-              cartas <span className="text-gray-400 font-bold">grises</span>
-              . siembre hay, hasta que se ocupa
-            </li>
+              cartas <span className="text-gray-400 font-bold">grises. </span>
+              Siembre hay, hasta que se ocupan.
+              </li>
             <li>
               <strong className="text-amber-400 ">Aluminio:</strong> Hay las
-              cartas <span className="text-amber-400 font-bold">amarillas</span>
-              . Las latas son de 1813 y el aberlatas de 1858. Fueron unos años dificiles
+              cartas <span className="text-amber-400 font-bold">amarillas. </span>
+              Sabes, las latas se inventaron de 1813 y el abrelatas hasta el 1858. Fueron unos años difíciles.
             </li>
             <li>
               <strong className="text-[#0085cb]">Envases:</strong> Son las
-              cartas <span className="text-[#0085cb] font-bold">azules</span>
-              . La mayor decepción, ver helado y en realidad eran frijoles.            </li>
+              cartas <span className="text-[#0085cb] font-bold">azules. </span>
+              De las mayores decepciones, pensar que hay helado, para que en realidad sean frijoles.
+              </li>
           </ul>
 
           <br />
