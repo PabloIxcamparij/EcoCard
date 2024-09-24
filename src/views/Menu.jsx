@@ -14,7 +14,6 @@ export default function App() {
         <ButtonMenu route={"viewScore"} title={"Puntajes"} Icon={ChartBarIcon} />
         <ButtonMenu route={"viewRules"} title={"Reglas"} Icon={DocumentTextIcon} />
         <ButtonMenu route={"viewRules"} title={"Descargar material"} />
-        <ButtonMusic />
       </div>
     </div>
   );
