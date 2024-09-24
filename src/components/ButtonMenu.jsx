@@ -11,7 +11,7 @@ export default function ButtonMenu({ route, title, Icon }) {
   });
 
   return (
-    <NavLink to={route} className="w-2/3">
+    <NavLink to={`/${route}`} className="w-2/3">
       <Button
         className="flex text-start w-full text-2xl font-bold bg-custom-green p-6 rounded-2xl text-white transform transition duration-250 hover:bg-custom-green-dark hover:scale-110 hover:-translate-y-4"
         onMouseEnter={() =>
