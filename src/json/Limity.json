@@ -3,29 +3,28 @@
     {
       "title": "Vidrio Roto",
       "color": "#BC4749",
-      "description": "No has usado las bolsas correctas para el vidrio, y se han roto, este tipo de cartas no vale en este nivel.",
+      "description": "No has usado las bolsas correctas para el vidrio, y se han roto, el vidrio no vale en este nivel.",
       "limityType": "noPlay",
       "type": "vidrio"
     },
     {
       "title": "Carton Mojado",
       "color": "#BC4749",
-      "description": "Ha estado lloviendo tanto que se ha mojado las cajas que ibas a reciclar, este tipo de cartas no vale en este nivel.",
-
+      "description": "Ha estado lloviendo tanto que se ha mojado las cajas que ibas a reciclar, el papel no vale en este nivel.",
       "limityType": "noPlay",
       "type": "papel y carton"
     },
     {
       "title": "Envases Sucios",
       "color": "#BC4749",
-      "description": "Te has olvido de limpiar los envases, y en estos han crecido hongos, este tipo de cartas no vale en este nivel.",
+      "description": "Te has olvidado de limpiar los envases, y en estos han crecido hongos, los envases no vale en este nivel.",
       "limityType": "noPlay",
       "type": "envases"
     },
     {
       "title": "Aluminio sin brillo",
       "color": "#BC4749",
-      "description": "Las latas que ibas a reciclar por un descuido se fueron con la basura, este tipo de cartas no vale en este nivel.",
+      "description": "Las latas que ibas a reciclar por un descuido se fueron con la basura, el aluminio no vale en este nivel.",
       "limityType": "noPlay",
       "type": "aluminio"
     }
